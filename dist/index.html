@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,19 +12,27 @@
     <title>Расписание 11Б</title>
 </head>
 <body>
+    <header>
+        Расписание 11Б
+        <div id="current"></div>
+    </header>
 
     <!-- Container  -->
     <div class="container">
-        <div class="title">Расписание 11Б</div>
+        
+
+        <div id="current_date_time_block2"></div>
+        <div id="current_date_time_block"></div>
+
         <div class="week"> 
-            
+
             <!-- Monday -->
             <article class="day"> 
                 <section class="day-header">Понедельник</section>
 
                 <!-- First lesson -->
                 <section class="lesson-line"> 
-                    <section class="lesson-start-time">8:15</section>
+                    <section class="lesson-start-time" id="f_lesson" value="8:15">8:15</section>
                     <section class="lesson-column"> 
                         <section class="lesson-name">Математика</section>
                         <section class="lesson-end-time">8:55</section>
@@ -367,5 +376,7 @@
             </article>
         </div>
     </div>
+
+    <script type="text/javascript" src="test.js" ></script>
 </body>
 </html>

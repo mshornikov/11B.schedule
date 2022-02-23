@@ -1,0 +1,1 @@
+{"version":3,"sources":["t.js"],"names":["console","log"],"mappings":";;AAEAA,OAAO,CAACC,GAAR,CAAY,OAAZ","sourcesContent":["\r\n\r\nconsole.log('hello');"],"file":"t.dev.js"}
