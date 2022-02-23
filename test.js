@@ -135,10 +135,10 @@ function whatLesson(hours, minutes, seconds, day) {
 
 }
 
-// setInterval(function () {
-//     document.getElementById('current').innerHTML = whatLesson(current_datetime.getHours(), current_datetime.getMinutes(), current_datetime.getSeconds(), getWeekDay(current_datetime, days));
-// }, 100);
-
 setInterval(function () {
-    document.getElementById('current').innerHTML = whatLesson(8, 14, 0, thursday);
+    document.getElementById('current').innerHTML = whatLesson(current_datetime.getHours(), current_datetime.getMinutes(), current_datetime.getSeconds(), getWeekDay(current_datetime, days));
 }, 100);
+
+// setInterval(function () {
+//     document.getElementById('current').innerHTML = whatLesson(8, 14, 0, thursday);
+// }, 100);
