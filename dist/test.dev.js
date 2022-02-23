@@ -47,11 +47,10 @@ function () {
 var Day =
 /*#__PURE__*/
 function () {
-  function Day(dayName, dayNumber, lessonAmount, lessons) {
+  function Day(dayName, lessonAmount, lessons) {
     _classCallCheck(this, Day);
 
     this.dayName = dayName;
-    this.dayNumber = dayNumber;
     this.lessonAmount = lessonAmount;
     this.lessons = lessons;
   }
@@ -60,11 +59,6 @@ function () {
     key: "get_dayName",
     value: function get_dayName() {
       return this.dayName;
-    }
-  }, {
-    key: "get_dayNumber",
-    value: function get_dayNumber() {
-      return this.dayNumber;
     }
   }, {
     key: "get_lessonAmount",
@@ -117,13 +111,13 @@ var tuesdayLessons = [new Lesson('Математика', new Time(8, 15, 0), new
 var wednesdayLessons = [new Lesson('Литература', new Time(9, 5, 0), new Time(9, 45, 0)), new Lesson('Физкультура', new Time(10, 5, 0), new Time(10, 45, 0)), new Lesson('Астрономия', new Time(11, 0, 0), new Time(11, 40, 0)), new Lesson('Экономика', new Time(11, 50, 0), new Time(12, 30, 0)), new Lesson('Право', new Time(12, 40, 0), new Time(13, 20, 0)), new Lesson('Английский язык', new Time(13, 30, 0), new Time(14, 10, 0))];
 var thursdayLessons = [new Lesson('Математика', new Time(8, 15, 0), new Time(8, 55, 0)), new Lesson('Информатика', new Time(9, 5, 0), new Time(9, 45, 0)), new Lesson('Обществознание', new Time(10, 5, 0), new Time(10, 45, 0)), new Lesson('Право', new Time(11, 0, 0), new Time(11, 40, 0)), new Lesson('Математика', new Time(11, 50, 0), new Time(12, 30, 0)), new Lesson('Физкультура', new Time(12, 40, 0), new Time(13, 20, 0))];
 var fridayLessons = [new Lesson('Физкультура', new Time(8, 15, 0), new Time(8, 55, 0)), new Lesson('Математика', new Time(9, 5, 0), new Time(9, 45, 0)), new Lesson('Физика', new Time(10, 5, 0), new Time(10, 45, 0)), new Lesson('Родной язык', new Time(11, 0, 0), new Time(11, 40, 0)), new Lesson('Экономика', new Time(11, 50, 0), new Time(12, 30, 0)), new Lesson('Биология', new Time(12, 40, 0), new Time(13, 20, 0)), new Lesson('История', new Time(13, 30, 0), new Time(14, 10, 0))];
-var sunday = new Day('Воскресенье', 0, 0, []);
-var monday = new Day('Понедельник', 1, 7, mondayLessons);
-var tuesday = new Day('Вторник', 2, 7, tuesdayLessons);
-var wednesday = new Day('Среда', 3, 6, wednesdayLessons);
-var thursday = new Day('Четверг', 4, 6, thursdayLessons);
-var friday = new Day('Пятница', 5, 7, fridayLessons);
-var saturday = new Day('Суббота', 6, 0, []);
+var sunday = new Day('Воскресенье', 0, []);
+var monday = new Day('Понедельник', 7, mondayLessons);
+var tuesday = new Day('Вторник', 7, tuesdayLessons);
+var wednesday = new Day('Среда', 6, wednesdayLessons);
+var thursday = new Day('Четверг', 6, thursdayLessons);
+var friday = new Day('Пятница', 7, fridayLessons);
+var saturday = new Day('Суббота', 0, []);
 var days = [sunday, monday, tuesday, wednesday, thursday, friday, saturday];
 
 function getWeekDay(date, days) {
@@ -161,6 +155,6 @@ function whatLesson(hours, minutes, seconds, day) {
 setInterval(function () {
   document.getElementById('current').innerHTML = whatLesson(current_datetime.getHours(), current_datetime.getMinutes(), current_datetime.getSeconds(), getWeekDay(current_datetime, days));
 }, 100); // setInterval(function () {
-//     document.getElementById('current').innerHTML = whatLesson(8, 14, 0, thursday);
+//     document.getElementById('current').innerHTML = whatLesson(9, 14, 0, thursday);
 // }, 100);
 //# sourceMappingURL=test.dev.js.map

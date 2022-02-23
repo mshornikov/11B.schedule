@@ -26,19 +26,14 @@ class Time {
 }
 
 class Day {
-    constructor(dayName, dayNumber, lessonAmount, lessons) {
+    constructor(dayName, lessonAmount, lessons) {
         this.dayName = dayName;
-        this.dayNumber = dayNumber;
         this.lessonAmount = lessonAmount;
         this.lessons = lessons;
     }
 
     get_dayName() {
         return this.dayName;
-    }
-
-    get_dayNumber() {
-        return this.dayNumber;
     }
 
     get_lessonAmount() {
@@ -90,13 +85,13 @@ var fridayLessons = [new Lesson('Физкультура', new Time(8, 15, 0), ne
 new Lesson('Родной язык', new Time(11, 0, 0), new Time(11, 40, 0)), new Lesson('Экономика', new Time(11, 50, 0), new Time(12, 30, 0)), new Lesson('Биология', new Time(12, 40, 0), new Time(13, 20, 0)),
 new Lesson('История', new Time(13, 30, 0), new Time(14, 10, 0))];
 
-var sunday = new Day('Воскресенье', 0, 0, [])
-var monday = new Day('Понедельник', 1, 7, mondayLessons);
-var tuesday = new Day('Вторник', 2, 7, tuesdayLessons);
-var wednesday = new Day('Среда', 3, 6, wednesdayLessons);
-var thursday = new Day('Четверг', 4, 6, thursdayLessons);
-var friday = new Day('Пятница', 5, 7, fridayLessons);
-var saturday = new Day('Суббота', 6, 0, [])
+var sunday = new Day('Воскресенье', 0, [])
+var monday = new Day('Понедельник', 7, mondayLessons);
+var tuesday = new Day('Вторник', 7, tuesdayLessons);
+var wednesday = new Day('Среда', 6, wednesdayLessons);
+var thursday = new Day('Четверг', 6, thursdayLessons);
+var friday = new Day('Пятница', 7, fridayLessons);
+var saturday = new Day('Суббота', 0, [])
 
 var days = [sunday, monday, tuesday, wednesday, thursday, friday, saturday];
 
@@ -140,5 +135,5 @@ setInterval(function () {
 }, 100);
 
 // setInterval(function () {
-//     document.getElementById('current').innerHTML = whatLesson(8, 14, 0, thursday);
+//     document.getElementById('current').innerHTML = whatLesson(9, 14, 0, thursday);
 // }, 100);
