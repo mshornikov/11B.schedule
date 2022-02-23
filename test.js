@@ -1,39 +1,4 @@
-// function date_time()
-// {
-//     var current_datetime = new Date();
-//     var day = zero_first_format(current_datetime.getDate());
-//     var month = zero_first_format(current_datetime.getMonth()+1);
-//     var year = current_datetime.getFullYear();
-//     var hours = zero_first_format(current_datetime.getHours());
-//     var minutes = zero_first_format(current_datetime.getMinutes());
-//     var seconds = zero_first_format(current_datetime.getSeconds());
-//     var weekDay = getWeekDay(current_datetime);
-
-//     return day+"."+month+"."+year+" "+hours+":"+minutes+":"+seconds+";"+weekDay;
-// }
-
 var current_datetime = new Date();
-
-// function zero_first_format(value)
-// {
-//     if (value < 10)
-//     {
-//         value='0'+value;
-//     }
-//     return value;
-// }
-
-
-    
-//     /* каждую секунду получаем текущую дату и время */
-//     /* и вставляем значение в блок с id "current_date_time_block2" */
-//     setInterval(function () {
-//         document.getElementById('current_date_time_block2').innerHTML = date_time();
-//     }, 1000);
-
-// /* выводим текущую дату и время на сайт в блок с id "current_date_time_block" */
-// document.getElementById('current_date_time_block').innerHTML = date_time();
-
 
 class Time {
     constructor(hours, minutes, seconds) {
@@ -52,10 +17,6 @@ class Time {
 
     get_seconds() {
         return this.seconds;
-    }
-
-    print() {
-        console.log(this.hours, ':', this.minutes, ':', this.seconds);
     }
 
     get_time() {
@@ -122,9 +83,8 @@ var wednesdayLessons = [new Lesson('Литература', new Time(9, 5, 0), ne
 new Lesson('Астрономия', new Time(11, 0, 0), new Time(11, 40, 0)), new Lesson('Экономика', new Time(11, 50, 0), new Time(12, 30, 0)), new Lesson('Право', new Time(12, 40, 0), new Time(13, 20, 0)),
 new Lesson('Английский язык', new Time(13, 30, 0), new Time(14, 10, 0))];
 
-var thursdayLessons = [new Lesson('Информатика', new Time(9, 5, 0), new Time(9, 45, 0)), new Lesson('Обществознание', new Time(10, 5, 0), new Time(10, 45, 0)), 
-new Lesson('Право', new Time(11, 0, 0), new Time(11, 40, 0)), new Lesson('Математика', new Time(11, 50, 0), new Time(12, 30, 0)), new Lesson('Физкультура', new Time(12, 40, 0), new Time(13, 20, 0)),
-new Lesson('Математика', new Time(13, 30, 0), new Time(14, 10, 0))];
+var thursdayLessons = [new Lesson('Математика', new Time(8, 15, 0), new Time(8, 55, 0)),new Lesson('Информатика', new Time(9, 5, 0), new Time(9, 45, 0)), new Lesson('Обществознание', new Time(10, 5, 0), new Time(10, 45, 0)), 
+new Lesson('Право', new Time(11, 0, 0), new Time(11, 40, 0)), new Lesson('Математика', new Time(11, 50, 0), new Time(12, 30, 0)), new Lesson('Физкультура', new Time(12, 40, 0), new Time(13, 20, 0))];
 
 var fridayLessons = [new Lesson('Физкультура', new Time(8, 15, 0), new Time(8, 55, 0)), new Lesson('Математика', new Time(9, 5, 0), new Time(9, 45, 0)), new Lesson('Физика', new Time(10, 5, 0), new Time(10, 45, 0)), 
 new Lesson('Родной язык', new Time(11, 0, 0), new Time(11, 40, 0)), new Lesson('Экономика', new Time(11, 50, 0), new Time(12, 30, 0)), new Lesson('Биология', new Time(12, 40, 0), new Time(13, 20, 0)),
@@ -155,7 +115,7 @@ function whatLesson(hours, minutes, seconds, day) {
 
     for (i in day.get_lessons()){
         if (time >= day.get_lessons()[i].get_startTime().get_time() & time <= day.get_lessons()[i].get_endTime().get_time()) {
-            return day.get_lessons()[i].get_name();
+            return 'Сейчас: ' + day.get_lessons()[i].get_name();
         }
         if (time + 1200 >= day.get_lessons()[i].get_startTime().get_time()) {
             var nextLesson = day.get_lessons()[i].get_name();
@@ -168,17 +128,17 @@ function whatLesson(hours, minutes, seconds, day) {
     }
 
     if (time <= day.get_lessons()[0].get_endTime().get_time()) {
-        return 'Ещё есть время до уроков';
+        return 'Уроки ещё не начались. <br> Первый урок: ' + day.get_lessons()[0].get_name();
     }
 
     return 'Перемена. Cледующий урок: ' + nextLesson;
 
 }
 
-setInterval(function () {
-    document.getElementById('current').innerHTML = 'Сейчас: ' + whatLesson(current_datetime.getHours(), current_datetime.getMinutes(), current_datetime.getSeconds(), getWeekDay(current_datetime, days));
-}, 1000);
-
 // setInterval(function () {
-//     document.getElementById('current').innerHTML = 'Сейчас: ' + whatLesson(10, 0, 0, monday);
-// }, 1000);
+//     document.getElementById('current').innerHTML = whatLesson(current_datetime.getHours(), current_datetime.getMinutes(), current_datetime.getSeconds(), getWeekDay(current_datetime, days));
+// }, 100);
+
+setInterval(function () {
+    document.getElementById('current').innerHTML = whatLesson(8, 14, 0, thursday);
+}, 100);
