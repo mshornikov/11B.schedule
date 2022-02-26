@@ -4,17 +4,10 @@ function getWeekDay(date) {
   var days = ['ВС', 'ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ'];
   return days[date.getDay()];
 }
-/* каждую секунду получаем текущую дату и время */
-
-/* и вставляем значение в блок с id "current_date_time_block2" */
-
-
-setInterval(function () {
-  document.getElementById('current_date_time_block2').innerHTML = date_time();
-}, 1000);
 /* функция добавления ведущих нулей */
 
 /* (если число меньше десяти, перед числом добавляем ноль) */
+
 
 function zero_first_format(value) {
   if (value < 10) {
@@ -41,4 +34,11 @@ function date_time() {
 
 
 document.getElementById('current_date_time_block').innerHTML = date_time();
+/* каждую секунду получаем текущую дату и время */
+
+/* и вставляем значение в блок с id "current_date_time_block2" */
+
+setInterval(function () {
+  document.getElementById('current_date_time_block2').innerHTML = date_time();
+}, 1000);
 //# sourceMappingURL=index.dev.js.map

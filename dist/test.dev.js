@@ -6,8 +6,6 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var current_datetime = new Date();
-
 var Time =
 /*#__PURE__*/
 function () {
@@ -124,7 +122,16 @@ function getWeekDay(date, days) {
   return days[date.getDay()];
 }
 
-function whatLesson(hours, minutes, seconds, day) {
+function whatLessonNow() {
+  var current_datetime = new Date();
+  var hours = current_datetime.getHours();
+  var minutes = current_datetime.getMinutes();
+  var seconds = current_datetime.getSeconds();
+  var day = getWeekDay(current_datetime, days); // var hours = 8;
+  // var minutes = second();
+  // var seconds = 0;
+  // var day = monday;
+
   var time = hours * 3600 + minutes * 60 + seconds;
 
   if (day == saturday | day == sunday) {
@@ -150,11 +157,30 @@ function whatLesson(hours, minutes, seconds, day) {
   }
 
   return 'Перемена. Cледующий урок: ' + nextLesson;
-}
+} // function whatLesson(hours, minutes, seconds, day) {
+//     let time = hours * 3600 + minutes * 60 + seconds;
+//     if (day == saturday | day == sunday) {
+//         return 'Сегодня выходной';
+//     }
+//     for (i in day.get_lessons()){
+//         if (time >= day.get_lessons()[i].get_startTime().get_time() & time <= day.get_lessons()[i].get_endTime().get_time()) {
+//             return 'Сейчас: ' + day.get_lessons()[i].get_name();
+//         }
+//         if (time + 1200 >= day.get_lessons()[i].get_startTime().get_time()) {
+//             var nextLesson = day.get_lessons()[i].get_name();
+//         }
+//     }
+//     if (time >= day.get_lessons()[day.get_lessons().length - 1].get_endTime().get_time() ) {
+//         return 'Уроки уже закончились';
+//     }
+//     if (time <= day.get_lessons()[0].get_endTime().get_time()) {
+//         return 'Уроки ещё не начались. <br> Первый урок: ' + day.get_lessons()[0].get_name();
+//     }
+//     return 'Перемена. Cледующий урок: ' + nextLesson;
+// }
+
 
 setInterval(function () {
-  document.getElementById('current').innerHTML = whatLesson(current_datetime.getHours(), current_datetime.getMinutes(), current_datetime.getSeconds(), getWeekDay(current_datetime, days));
-}, 100); // setInterval(function () {
-//     document.getElementById('current').innerHTML = whatLesson(9, 14, 0, thursday);
-// }, 100);
+  document.getElementById('current_status').innerHTML = whatLessonNow();
+}, 100);
 //# sourceMappingURL=test.dev.js.map

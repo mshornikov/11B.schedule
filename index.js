@@ -4,11 +4,7 @@ let days = ['ВС', 'ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ'];
 return days[date.getDay()];
 }
 
-/* каждую секунду получаем текущую дату и время */
-/* и вставляем значение в блок с id "current_date_time_block2" */
-setInterval(function () {
-    document.getElementById('current_date_time_block2').innerHTML = date_time();
-}, 1000);
+
 
 /* функция добавления ведущих нулей */
 /* (если число меньше десяти, перед числом добавляем ноль) */
@@ -40,3 +36,8 @@ function date_time()
 
 /* выводим текущую дату и время на сайт в блок с id "current_date_time_block" */
 document.getElementById('current_date_time_block').innerHTML = date_time();
+/* каждую секунду получаем текущую дату и время */
+/* и вставляем значение в блок с id "current_date_time_block2" */
+setInterval(function () {
+    document.getElementById('current_date_time_block2').innerHTML = date_time();
+}, 1000);

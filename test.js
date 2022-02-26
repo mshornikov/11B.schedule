@@ -1,5 +1,3 @@
-var current_datetime = new Date();
-
 class Time {
     constructor(hours, minutes, seconds) {
         this.hours = hours;
@@ -97,10 +95,19 @@ var days = [sunday, monday, tuesday, wednesday, thursday, friday, saturday];
 
 function getWeekDay(date, days) {    
     return days[date.getDay()];
-    }
+    } 
 
+function whatLessonNow() {
+    var current_datetime = new Date();
+    var hours = current_datetime.getHours();
+    var minutes = current_datetime.getMinutes();
+    var seconds = current_datetime.getSeconds();
+    var day = getWeekDay(current_datetime, days);
 
-function whatLesson(hours, minutes, seconds, day) {
+    // var hours = 8;
+    // var minutes = second();
+    // var seconds = 0;
+    // var day = monday;
 
     let time = hours * 3600 + minutes * 60 + seconds;
 
@@ -130,10 +137,37 @@ function whatLesson(hours, minutes, seconds, day) {
 
 }
 
-setInterval(function () {
-    document.getElementById('current').innerHTML = whatLesson(current_datetime.getHours(), current_datetime.getMinutes(), current_datetime.getSeconds(), getWeekDay(current_datetime, days));
-}, 100);
 
-// setInterval(function () {
-//     document.getElementById('current').innerHTML = whatLesson(9, 14, 0, thursday);
-// }, 100);
+// function whatLesson(hours, minutes, seconds, day) {
+
+//     let time = hours * 3600 + minutes * 60 + seconds;
+
+//     if (day == saturday | day == sunday) {
+//         return 'Сегодня выходной';
+//     }
+
+//     for (i in day.get_lessons()){
+//         if (time >= day.get_lessons()[i].get_startTime().get_time() & time <= day.get_lessons()[i].get_endTime().get_time()) {
+//             return 'Сейчас: ' + day.get_lessons()[i].get_name();
+//         }
+//         if (time + 1200 >= day.get_lessons()[i].get_startTime().get_time()) {
+//             var nextLesson = day.get_lessons()[i].get_name();
+//         }
+        
+//     }
+
+//     if (time >= day.get_lessons()[day.get_lessons().length - 1].get_endTime().get_time() ) {
+//         return 'Уроки уже закончились';
+//     }
+
+//     if (time <= day.get_lessons()[0].get_endTime().get_time()) {
+//         return 'Уроки ещё не начались. <br> Первый урок: ' + day.get_lessons()[0].get_name();
+//     }
+
+//     return 'Перемена. Cледующий урок: ' + nextLesson;
+
+// }
+
+setInterval(function () {
+    document.getElementById('current_status').innerHTML = whatLessonNow();
+}, 100);
