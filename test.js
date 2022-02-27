@@ -179,7 +179,7 @@ function whatLessonNow() {
 
     // Loop which
     for (i in day.get_lessons()){
-        if (time > day.get_lessons()[i].get_startTime().get_time() & time < day.get_lessons()[i].get_endTime().get_time()) {
+        if (time >= day.get_lessons()[i].get_startTime().get_time() & time < day.get_lessons()[i].get_endTime().get_time()) {
             return 'Сейчас: ' + day.get_lessons()[i].get_name() + '<br> Осталось ' + estTime('lesson');
         }
         if (time + 1200 >= day.get_lessons()[i].get_startTime().get_time()) {
