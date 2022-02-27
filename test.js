@@ -112,6 +112,8 @@ function zero_first_format(value) {
 
 // Function which replacing day number to day object ('0' -> saturday)
 function getWeekDay(date) {    
+    var week = [sunday, monday, tuesday, wednesday, thursday, friday, saturday]
+
     return week[date.getDay()];
     }
 
@@ -191,8 +193,8 @@ function whatLessonNow() {
     }
 
     // Time before lessons ('8:14')
-    if (time <= day.get_lessons()[0].get_startTime().get_time()) {
-        return 'Уроки ещё не начались. <br>Первый урок: ' + day.get_lessons()[0].get_name() + 'До урока: ' + estTime('weekend');
+    if (time < day.get_lessons()[0].get_startTime().get_time()) {
+        return 'Уроки ещё не начались. <br>Первый урок: ' + day.get_lessons()[0].get_name() + '<br>До урока: ' + estTime('weekend');
     }
 
     // Break
