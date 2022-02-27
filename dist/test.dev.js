@@ -358,7 +358,7 @@ function estTime(type) {
   }
 
   if (type == 'weekend') {
-    var _est2 = nextLesson().get_endTime().get_time();
+    var _est2 = nextLesson().get_startTime().get_time();
 
     return secondsToTime(_est2 - time, 'long');
   }
