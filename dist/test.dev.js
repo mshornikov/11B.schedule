@@ -114,9 +114,9 @@ function () {
 
 var mondayLessons = [new Lesson('Математика', new Time(8, 15, 0, 2), new Time(8, 55, 0, 2)), new Lesson('Химия', new Time(9, 5, 0, 2), new Time(9, 45, 0, 2)), new Lesson('Математика', new Time(10, 5, 0, 2), new Time(10, 45, 0, 2)), new Lesson('Обществознание', new Time(11, 0, 0, 2), new Time(11, 40, 0, 2)), new Lesson('Литература', new Time(11, 50, 0, 2), new Time(12, 30, 0, 2)), new Lesson('Английский язык', new Time(12, 40, 0, 2), new Time(13, 20, 0, 2)), new Lesson('ОБЖ', new Time(13, 30, 0, 2), new Time(14, 10, 0, 2))];
 var tuesdayLessons = [new Lesson('Математика', new Time(8, 15, 0, 3), new Time(8, 55, 0, 3)), new Lesson('Русский язык', new Time(9, 5, 0, 3), new Time(9, 45, 0, 3)), new Lesson('Английский язык', new Time(10, 5, 0, 3), new Time(10, 45, 0, 3)), new Lesson('История', new Time(11, 0, 0, 3), new Time(11, 40, 0, 3)), new Lesson('Литература', new Time(11, 50, 0, 3), new Time(12, 30, 0, 3)), new Lesson('География', new Time(12, 40, 0, 3), new Time(13, 20, 0, 3)), new Lesson('Физика', new Time(13, 30, 0, 3), new Time(14, 10, 0, 3))];
-var wednesdayLessons = [new Lesson('Литература', new Time(9, 5, 0, 4), new Time(9, 45, 4)), new Lesson('Физкультура', new Time(10, 5, 4), new Time(10, 45, 4)), new Lesson('Астрономия', new Time(11, 0, 4), new Time(11, 40, 4)), new Lesson('Экономика', new Time(11, 50, 4), new Time(12, 30, 4)), new Lesson('Право', new Time(12, 40, 4), new Time(13, 20, 4)), new Lesson('Английский язык', new Time(13, 30, 4), new Time(14, 10, 4))];
-var thursdayLessons = [new Lesson('Математика', new Time(8, 15, 5), new Time(8, 55, 5)), new Lesson('Информатика', new Time(9, 5, 5), new Time(9, 45, 5)), new Lesson('Обществознание', new Time(10, 5, 5), new Time(10, 45, 5)), new Lesson('Право', new Time(11, 0, 5), new Time(11, 40, 5)), new Lesson('Математика', new Time(11, 50, 5), new Time(12, 30, 5)), new Lesson('Физкультура', new Time(12, 40, 5), new Time(13, 20, 5))];
-var fridayLessons = [new Lesson('Физкультура', new Time(8, 15, 6), new Time(8, 55, 6)), new Lesson('Математика', new Time(9, 5, 6), new Time(9, 45, 6)), new Lesson('Физика', new Time(10, 5, 6), new Time(10, 45, 6)), new Lesson('Родной язык', new Time(11, 0, 6), new Time(11, 40, 6)), new Lesson('Экономика', new Time(11, 50, 6), new Time(12, 30, 6)), new Lesson('Биология', new Time(12, 40, 6), new Time(13, 20, 6)), new Lesson('История', new Time(13, 30, 6), new Time(14, 10, 6))]; // Days declaration
+var wednesdayLessons = [new Lesson('Литература', new Time(9, 5, 0, 4), new Time(9, 45, 0, 4)), new Lesson('Физкультура', new Time(10, 5, 0, 4), new Time(10, 45, 0, 4)), new Lesson('Астрономия', new Time(11, 0, 0, 4), new Time(11, 40, 0, 4)), new Lesson('Экономика', new Time(11, 50, 0, 4), new Time(12, 30, 0, 4)), new Lesson('Право', new Time(12, 40, 0, 4), new Time(13, 20, 0, 4)), new Lesson('Английский язык', new Time(13, 30, 0, 4), new Time(14, 10, 0, 4))];
+var thursdayLessons = [new Lesson('Математика', new Time(8, 15, 0, 5), new Time(8, 55, 0, 5)), new Lesson('Информатика', new Time(9, 5, 0, 5), new Time(9, 45, 0, 5)), new Lesson('Обществознание', new Time(10, 5, 0, 5), new Time(10, 45, 0, 5)), new Lesson('Право', new Time(11, 0, 0, 5), new Time(11, 40, 0, 5)), new Lesson('Математика', new Time(11, 50, 0, 5), new Time(12, 30, 0, 5)), new Lesson('Физкультура', new Time(12, 40, 0, 5), new Time(13, 20, 0, 5))];
+var fridayLessons = [new Lesson('Физкультура', new Time(8, 15, 0, 6), new Time(8, 55, 0, 6)), new Lesson('Математика', new Time(9, 5, 0, 6), new Time(9, 45, 0, 6)), new Lesson('Физика', new Time(10, 5, 0, 6), new Time(10, 45, 0, 6)), new Lesson('Родной язык', new Time(11, 0, 0, 6), new Time(11, 40, 0, 6)), new Lesson('Экономика', new Time(11, 50, 0, 6), new Time(12, 30, 0, 6)), new Lesson('Биология', new Time(12, 40, 0, 6), new Time(13, 20, 0, 6)), new Lesson('История', new Time(13, 30, 0, 6), new Time(14, 10, 0, 6))]; // Days declaration
 
 var sunday = new Day('Воскресенье', 0, []);
 var monday = new Day('Понедельник', 7, mondayLessons);
@@ -169,6 +169,10 @@ function secondsToTime(time, length) {
   }
 
   if (length == 'long') {
+    if (~~(time / 24 % 3600 * 24 / 3600) == 0) {
+      return ~~(time % 3600 / 60).toString() + ':' + zero_first_format(~~(time % 3600 % 60)).toString();
+    }
+
     return (~~(time / 24 % 3600 * 24 / 3600)).toString() + ':' + zero_first_format(~~(time % 3600 / 60)).toString() + ':' + zero_first_format(~~(time % 3600 % 60)).toString();
   }
 
@@ -205,16 +209,16 @@ function whatLessonNow() {
 
 
   if (time >= day.get_lessons()[day.get_lessons().length - 1].get_endTime().get_time()) {
-    return 'Уроки уже закончились';
+    return 'Уроки уже закончились' + '<br>До уроков: ' + estTime('weekend');
   } // Time before lessons ('8:14')
 
 
   if (time <= day.get_lessons()[0].get_startTime().get_time()) {
-    return 'Уроки ещё не начались. <br> Первый урок: ' + day.get_lessons()[0].get_name();
+    return 'Уроки ещё не начались. <br>Первый урок: ' + day.get_lessons()[0].get_name() + 'До урока: ' + estTime('weekend');
   } // Break
 
 
-  return 'Перемена. Cледующий урок: ' + nextLesson + '<br>' + 'До начала урока ' + estTime('break');
+  return 'Перемена. Cледующий урок: ' + nextLesson + '<br>До урока ' + estTime('break');
 }
 
 function whatLesson() {
@@ -257,6 +261,7 @@ function whatLesson() {
 } // Updating status in header
 
 
+document.getElementById('current_status').innerHTML = whatLessonNow();
 setInterval(function () {
   document.getElementById('current_status').innerHTML = whatLessonNow(); // document.getElementById('est').innerHTML = estTime('lesson');
 }, 1000); // Document writing
@@ -327,7 +332,8 @@ function nextLesson() {
 
 
   return nextLesson;
-}
+} // Function which counting estimated time to the next lesson
+
 
 function estTime(type) {
   // Current time declaration
