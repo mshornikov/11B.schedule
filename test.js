@@ -342,7 +342,7 @@ function estTime(type) {
         return secondsToTime(est - time, 'short');
     }
     if (type == 'weekend') {
-        let est = nextLesson().get_endTime().get_time();
+        let est = nextLesson().get_startTime().get_time();
         return secondsToTime(est - time, 'long');
     }
 }
