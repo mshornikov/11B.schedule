@@ -68,3 +68,9 @@ header {
 
     margin: 0 0 5px 0 ;
 }
+
+
+/* Hiding old markup. New in JS */
+.container#old {
+    display: none;
+}
