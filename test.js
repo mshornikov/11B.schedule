@@ -177,16 +177,6 @@ function whatLessonNow() {
         return 'Сегодня выходной' + '<br>До уроков: ' + estTime('weekend');
     }
 
-    // Loop which
-    for (i in day.get_lessons()){
-        if (time >= day.get_lessons()[i].get_startTime().get_time() & time < day.get_lessons()[i].get_endTime().get_time()) {
-            return 'Сейчас: ' + day.get_lessons()[i].get_name() + '<br> Осталось ' + estTime('lesson');
-        }
-        if (time + 1200 >= day.get_lessons()[i].get_startTime().get_time()) {
-            var nextLesson = day.get_lessons()[i].get_name();
-        }
-    }
-
     // Time after lessons ('15:00')
     if (time >= day.get_lessons()[day.get_lessons().length - 1].get_endTime().get_time() ) {
         return 'Уроки уже закончились' + '<br>До уроков: ' + estTime('weekend');
@@ -195,6 +185,16 @@ function whatLessonNow() {
     // Time before lessons ('8:14')
     if (time < day.get_lessons()[0].get_startTime().get_time()) {
         return 'Уроки ещё не начались. <br>Первый урок: ' + day.get_lessons()[0].get_name() + '<br>До урока: ' + estTime('weekend');
+    }
+
+    // Loop which
+    for (i in day.get_lessons()){
+        if (time > day.get_lessons()[i].get_startTime().get_time() & time < day.get_lessons()[i].get_endTime().get_time()) {
+            return 'Сейчас: ' + day.get_lessons()[i].get_name() + '<br> Осталось ' + estTime('lesson');
+        }
+        if (time + 1200 >= day.get_lessons()[i].get_startTime().get_time()) {
+            var nextLesson = day.get_lessons()[i].get_name();
+        }
     }
 
     // Break
@@ -222,13 +222,6 @@ function whatLesson() {
         return 'Weekend';
     }
 
-    // Loop which
-    for (let i = 0;  i < day.get_lessons().length; i++){
-        if (time >= day.get_lessons()[i].get_startTime().get_time() & time <= day.get_lessons()[i].get_endTime().get_time()) {
-            return day.get_lessons()[i];
-        }
-    }
-
     // Time after lessons ('15:00')
     if (time >= day.get_lessons()[day.get_lessons().length - 1].get_endTime().get_time() ) {
         return 'End';
@@ -237,6 +230,13 @@ function whatLesson() {
     // Time before lessons ('8:14')
     if (time <= day.get_lessons()[0].get_startTime().get_time()) {
         return 'Before';
+    }
+
+    // Loop which
+    for (let i = 0;  i < day.get_lessons().length; i++){
+        if (time >= day.get_lessons()[i].get_startTime().get_time() & time <= day.get_lessons()[i].get_endTime().get_time()) {
+            return day.get_lessons()[i];
+        }
     }
     
     // Break
@@ -295,16 +295,6 @@ function nextLesson() {
         return week[week.indexOf(day) + 1].get_lessons()[0];
     }
 
-    // Loop which
-    for (let i = 0;  i < day.get_lessons().length; i++){
-        if (time >= day.get_lessons()[i].get_startTime().get_time() & time <= day.get_lessons()[i].get_endTime().get_time()) {
-            return day.get_lessons()[i+1];
-        }
-        if (time + 1200 >= day.get_lessons()[i].get_startTime().get_time()) {
-            var nextLesson = day.get_lessons()[i];
-        }
-    }
-
     // Time after lessons ('15:00')
     if (time >= day.get_lessons()[day.get_lessons().length - 1].get_endTime().get_time() ) {
         return week[week.indexOf(day) + 1].get_lessons()[0];
@@ -313,6 +303,16 @@ function nextLesson() {
     // Time before lessons ('8:14')
     if (time <= day.get_lessons()[0].get_startTime().get_time()) {
         return day.get_lessons()[0];
+    }
+
+    // Loop which
+    for (let i = 0;  i < day.get_lessons().length; i++){
+        if (time >= day.get_lessons()[i].get_startTime().get_time() & time <= day.get_lessons()[i].get_endTime().get_time()) {
+            return day.get_lessons()[i+1];
+        }
+        if (time + 1200 >= day.get_lessons()[i].get_startTime().get_time()) {
+            var nextLesson = day.get_lessons()[i];
+        }
     }
     
     // Break
