@@ -87,7 +87,7 @@ function whatLessonNow() {
   } // Time before lessons ('8:14')
 
 
-  if (time <= day.get_lessons()[0].get_startTime().get_time()) {
+  if (time + 1 <= day.get_lessons()[0].get_startTime().get_time()) {
     return 'Уроки ещё не начались. <br>Первый урок: ' + day.get_lessons()[0].get_name() + '<br>До урока: ' + estTime('weekend');
   } // Break
 
@@ -103,26 +103,7 @@ function whatLesson() {
   var seconds = current_datetime.getSeconds();
   var day = getWeekDay(current_datetime, week); // Converting time from 8:01:01 to 28861 for comparing
 
-  var time = timeToSeconds(hours, minutes, seconds, day); // Weekend
-
-  if (day == saturday) {
-    return 'Weekend';
-  }
-
-  if (day == sunday) {
-    return 'Weekend';
-  } // Time after lessons ('15:00')
-
-
-  if (time >= day.get_lessons()[day.get_lessons().length - 1].get_endTime().get_time()) {
-    return 'End';
-  } // Time before lessons ('8:14')
-
-
-  if (time <= day.get_lessons()[0].get_startTime().get_time()) {
-    return 'Before';
-  } // Loop which
-
+  var time = timeToSeconds(hours, minutes, seconds, day); // Loop which
 
   for (var _i = 0; _i < day.get_lessons().length; _i++) {
     if (time >= day.get_lessons()[_i].get_startTime().get_time() & time < day.get_lessons()[_i].get_endTime().get_time()) {
@@ -131,7 +112,7 @@ function whatLesson() {
   } // Break
 
 
-  return 'Break';
+  return;
 } // Updating status in header
 
 
