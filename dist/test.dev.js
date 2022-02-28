@@ -195,6 +195,16 @@ function whatLessonNow() {
 
   if (day == saturday | day == sunday) {
     return 'Сегодня выходной' + '<br>До уроков: ' + estTime('weekend');
+  } // Time after lessons ('15:00')
+
+
+  if (time >= day.get_lessons()[day.get_lessons().length - 1].get_endTime().get_time()) {
+    return 'Уроки уже закончились' + '<br>До уроков: ' + estTime('weekend');
+  } // Time before lessons ('8:14')
+
+
+  if (time < day.get_lessons()[0].get_startTime().get_time()) {
+    return 'Уроки ещё не начались. <br>Первый урок: ' + day.get_lessons()[0].get_name() + '<br>До урока: ' + estTime('weekend');
   } // Loop which
 
 
@@ -206,16 +216,6 @@ function whatLessonNow() {
     if (time + 1200 >= day.get_lessons()[i].get_startTime().get_time()) {
       var nextLesson = day.get_lessons()[i].get_name();
     }
-  } // Time after lessons ('15:00')
-
-
-  if (time >= day.get_lessons()[day.get_lessons().length - 1].get_endTime().get_time()) {
-    return 'Уроки уже закончились' + '<br>До уроков: ' + estTime('weekend');
-  } // Time before lessons ('8:14')
-
-
-  if (time < day.get_lessons()[0].get_startTime().get_time()) {
-    return 'Уроки ещё не начались. <br>Первый урок: ' + day.get_lessons()[0].get_name() + '<br>До урока: ' + estTime('weekend');
   } // Break
 
 
@@ -238,13 +238,6 @@ function whatLesson() {
 
   if (day == sunday) {
     return 'Weekend';
-  } // Loop which
-
-
-  for (var _i = 0; _i < day.get_lessons().length; _i++) {
-    if (time >= day.get_lessons()[_i].get_startTime().get_time() & time <= day.get_lessons()[_i].get_endTime().get_time()) {
-      return day.get_lessons()[_i];
-    }
   } // Time after lessons ('15:00')
 
 
@@ -255,6 +248,13 @@ function whatLesson() {
 
   if (time <= day.get_lessons()[0].get_startTime().get_time()) {
     return 'Before';
+  } // Loop which
+
+
+  for (var _i = 0; _i < day.get_lessons().length; _i++) {
+    if (time >= day.get_lessons()[_i].get_startTime().get_time() & time <= day.get_lessons()[_i].get_endTime().get_time()) {
+      return day.get_lessons()[_i];
+    }
   } // Break
 
 
@@ -308,6 +308,16 @@ function nextLesson() {
 
   if (day == sunday) {
     return week[week.indexOf(day) + 1].get_lessons()[0];
+  } // Time after lessons ('15:00')
+
+
+  if (time >= day.get_lessons()[day.get_lessons().length - 1].get_endTime().get_time()) {
+    return week[week.indexOf(day) + 1].get_lessons()[0];
+  } // Time before lessons ('8:14')
+
+
+  if (time <= day.get_lessons()[0].get_startTime().get_time()) {
+    return day.get_lessons()[0];
   } // Loop which
 
 
@@ -319,16 +329,6 @@ function nextLesson() {
     if (time + 1200 >= day.get_lessons()[_i2].get_startTime().get_time()) {
       var nextLesson = day.get_lessons()[_i2];
     }
-  } // Time after lessons ('15:00')
-
-
-  if (time >= day.get_lessons()[day.get_lessons().length - 1].get_endTime().get_time()) {
-    return week[week.indexOf(day) + 1].get_lessons()[0];
-  } // Time before lessons ('8:14')
-
-
-  if (time <= day.get_lessons()[0].get_startTime().get_time()) {
-    return day.get_lessons()[0];
   } // Break
 
 
