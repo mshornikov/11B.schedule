@@ -47,7 +47,7 @@ function secondsToTime(time, length) {
             return ~~((time % 3600) / 60).toString() + ':' + zero_first_format(~~((time % 3600) % 60)).toString();
         }
 
-        return (~~(((time / 24) % 3600 * 24) / 3600)).toString() + ':' + zero_first_format(~~((time % 3600) / 60)).toString() + ':' + zero_first_format(~~((time % 3600) % 60)).toString();
+        return ((~~(((time / 24) % 3600 * 24) / 3600)) + (~~((time / 24) / 3600)) * 24).toString() + ':' + zero_first_format(~~((time % 3600) / 60)).toString() + ':' + zero_first_format(~~((time % 3600) % 60)).toString();
     }
 
     if (length == 'short') {
