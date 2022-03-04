@@ -1,195 +1,161 @@
 "use strict";
 
-// Function which changing '1' -> '01'
-function zero_first_format(value) {
-  if (value < 10) {
-    value = '0' + value;
-  }
-
-  return value;
-} // Function which replacing day number to day object ('0' -> saturday)
-
-
-function getWeekDay(date) {
-  var week = [sunday, monday, tuesday, wednesday, thursday, friday, saturday];
-  return week[date.getDay()];
-} // Function which replacing day object to day number (saturday -> '0')
-
-
-function getDayNumber(day) {
-  return dayNumber = week[week.indexOf(day)];
-} // Function which convert time from 8:01:01 to 28861 for comparing
-
-
-function timeToSeconds(hours, minutes, seconds, day) {
-  var dayNumber = week.indexOf(day); // Converting time from 8:01:01 to 28861 for comparing
-
-  var time = dayNumber * 24 * 3600 + hours * 3600 + minutes * 60 + seconds;
-  return time;
-} // Function which convert time from 28861 to 8:01:01 for output
-
-
-function secondsToTime(time, length) {
-  if (length == 'seconds') {
-    return zero_first_format(~~(time % 3600 % 60)).toString();
-  }
-
-  if (length == 'minutes') {
-    return zero_first_format(~~(time % 3600 / 60)).toString();
-  }
-
-  if (length == 'hours') {
-    return (~~(time / 24 % 3600 * 24 / 3600)).toString();
-  }
-
-  if (length == 'long') {
-    if (~~(time / 24 % 3600 * 24 / 3600) == 0) {
-      return ~~(time % 3600 / 60).toString() + ':' + zero_first_format(~~(time % 3600 % 60)).toString();
-    }
-
-    return (~~(time / 24 % 3600 * 24 / 3600) + ~~(time / 24 / 3600)).toString() + ':' + zero_first_format(~~(time % 3600 / 60)).toString() + ':' + zero_first_format(~~(time % 3600 % 60)).toString();
-  }
-
-  if (length == 'short') {
-    return ~~(time % 3600 / 60).toString() + ':' + zero_first_format(~~(time % 3600 % 60)).toString();
-  }
-} // Function whic by current time understands what lesson now
-
-
-function whatLessonNow() {
-  // Current time declaration
-  var current_datetime = new Date();
-  var hours = current_datetime.getHours();
-  var minutes = current_datetime.getMinutes();
-  var seconds = current_datetime.getSeconds();
-  var day = getWeekDay(current_datetime, week); // Converting time from 8:01:01 to 28861 for comparing
-
-  var time = timeToSeconds(hours, minutes, seconds, day); // Weekend
+// Tracking current lesson and next lesson. And giving it to the page. Counting estimated time ti the next lesson
+// Getting current lesson (object)
+function whatLessonNow(time) {
+  // Getting current time and day (in object)
+  var day = my_getWeekDay(currentDate(time)); // Weekend case
 
   if (day == saturday | day == sunday) {
-    return 'Сегодня выходной' + '<br>До уроков: ' + estTime('weekend');
-  } // Loop which
+    return 'weekend';
+  } // Loop that running at lessons array and getting current lesson
 
 
   for (i in day.get_lessons()) {
-    if (time >= day.get_lessons()[i].get_startTime().get_time() & time < day.get_lessons()[i].get_endTime().get_time()) {
-      return 'Сейчас: ' + day.get_lessons()[i].get_name() + '<br> Осталось ' + estTime('lesson');
-    }
+    var lesson = day.get_lessons()[i];
 
-    if (time + 1200 >= day.get_lessons()[i].get_startTime().get_time()) {
-      var nextLesson = day.get_lessons()[i].get_name();
+    if (time >= lesson.get_startTime().get_time() & time <= lesson.get_endTime().get_time()) {
+      return lesson;
     }
-  } // Time after lessons ('15:00')
+  } // Time after lessons ('15:00') case
 
 
   if (time >= day.get_lessons()[day.get_lessons().length - 1].get_endTime().get_time()) {
-    return 'Уроки уже закончились' + '<br>До уроков: ' + estTime('weekend');
-  } // Time before lessons ('8:14')
+    return 'after';
+  } // Time before lessons ('8:14') case
 
 
   if (time + 1 <= day.get_lessons()[0].get_startTime().get_time()) {
-    return 'Уроки ещё не начались. <br>Первый урок: ' + day.get_lessons()[0].get_name() + '<br>До урока: ' + estTime('weekend');
-  } // Break
+    return 'before';
+  } // Break case
 
 
-  return 'Перемена. Cледующий урок: ' + nextLesson + '<br>До урока ' + estTime('break');
-}
-
-function whatLesson() {
-  // Current time declaration
-  var current_datetime = new Date();
-  var hours = current_datetime.getHours();
-  var minutes = current_datetime.getMinutes();
-  var seconds = current_datetime.getSeconds();
-  var day = getWeekDay(current_datetime, week); // Converting time from 8:01:01 to 28861 for comparing
-
-  var time = timeToSeconds(hours, minutes, seconds, day); // Loop which
-
-  for (var _i = 0; _i < day.get_lessons().length; _i++) {
-    if (time >= day.get_lessons()[_i].get_startTime().get_time() & time < day.get_lessons()[_i].get_endTime().get_time()) {
-      return day.get_lessons()[_i];
-    }
-  } // Break
+  return 'break';
+} // Creating output from current status
 
 
-  return;
-} // Updating status in header
+function currentStatus(status, time) {
+  // lesson
+  if (toString.call(status) == '[object Object]') {
+    return 'Сейчас: ' + status.get_name() + ' ' + estTime('lesson', time);
+  } // break
 
 
-document.getElementById('current_status').innerHTML = whatLessonNow();
-setInterval(function () {
-  document.getElementById('current_status').innerHTML = whatLessonNow(); // document.getElementById('est').innerHTML = estTime('lesson');
-}, 1000); // Function which understand which lesson is next
+  if (status == 'break') {
+    return 'Перемена. Cледующий урок: ' + nextLesson(time).get_name() + ' До урока ' + estTime('break', time);
+  } // time before lessons
 
-function nextLesson() {
-  // Current time declaration
-  var current_datetime = new Date();
-  var hours = current_datetime.getHours();
-  var minutes = current_datetime.getMinutes();
-  var seconds = current_datetime.getSeconds();
-  var day = getWeekDay(current_datetime, week); // Converting time from 8:01:01 to 28861 for comparing
 
-  var time = timeToSeconds(hours, minutes, seconds, day); // Weekend
+  if (status == 'before') {
+    return 'Уроки ещё не начались. Первый урок: ' + nextLesson(time).get_name() + ' До урока: ' + estTime('before', time);
+  } // time after lessons
+
+
+  if (status == 'after') {
+    return 'Уроки уже закончились' + ' До уроков: ' + estTime('after', time);
+  } // weekend
+
+
+  if (status == 'weekend') {
+    return 'Сегодня выходной' + ' До уроков: ' + estTime('before', time);
+  }
+} // Function which understand which lesson is the next
+
+
+function nextLesson(time) {
+  var day = my_getWeekDay(currentDate(time));
+  var dayNumber = getDayNumber(day); // Weekend
 
   if (day == saturday) {
-    return week[week.indexOf(day) + 2].get_lessons()[0];
+    return week[dayNumber + 2].get_lessons()[0];
   }
 
   if (day == sunday) {
-    return week[week.indexOf(day) + 1].get_lessons()[0];
-  } // Time after lessons ('15:00')
+    return week[dayNumber + 1].get_lessons()[0];
+  } // Time after lessons ('15:00') at the end of the day
 
 
   if (time >= day.get_lessons()[day.get_lessons().length - 1].get_endTime().get_time()) {
-    return week[week.indexOf(day) + 1].get_lessons()[0];
-  } // Time before lessons ('8:14')
+    // exclusion for friday (next lesson is the first lesson at monday)
+    if (day == friday) {
+      return week[2].get_lessons()[0];
+    }
+
+    return week[dayNumber + 1].get_lessons()[0];
+  } // Time before lessons ('8:14') at the start of the day
 
 
   if (time <= day.get_lessons()[0].get_startTime().get_time()) {
     return day.get_lessons()[0];
-  } // Loop which
+  } // Loop that running at lessons array and getting next lesson
 
 
-  for (var _i2 = 0; _i2 < day.get_lessons().length; _i2++) {
-    if (time >= day.get_lessons()[_i2].get_startTime().get_time() & time <= day.get_lessons()[_i2].get_endTime().get_time()) {
-      return day.get_lessons()[_i2 + 1];
+  for (var _i = 0; _i < day.get_lessons().length; _i++) {
+    var lesson = day.get_lessons()[_i];
+
+    var maxBreakLength = 1200; // in seconds
+
+    if (time >= lesson.get_startTime().get_time() & time <= lesson.get_endTime().get_time()) {
+      // exclusion for last lesson at friday
+      if (day == friday & lesson == day.get_lessons(day.get_lessonAmount() - 1)) {
+        return weel[0].get_lessons()[0];
+      }
+
+      return day.get_lessons()[_i + 1];
     }
 
-    if (time + 1200 >= day.get_lessons()[_i2].get_startTime().get_time()) {
-      var nextLesson = day.get_lessons()[_i2];
+    if (time + maxBreakLength >= lesson.get_startTime().get_time()) {
+      var next_lesson = lesson;
     }
   } // Break
 
 
-  return nextLesson;
-} // Function which counting estimated time to the next lesson
+  return next_lesson;
+} // Updating status in header
+// For fast download of web page
 
 
-function estTime(type) {
-  // Current time declaration
-  var current_datetime = new Date();
-  var hours = current_datetime.getHours();
-  var minutes = current_datetime.getMinutes();
-  var seconds = current_datetime.getSeconds();
-  var day = getWeekDay(current_datetime, week); // Converting time from 8:01:01 to 28861 for comparing
+var time = currentTime();
+document.getElementById('current_status').innerHTML = currentStatus(whatLessonNow(time), time); // timer for every second update
 
-  var time = timeToSeconds(hours, minutes, seconds, day);
+setInterval(function () {
+  // Getting current time
+  var time = currentTime();
+  document.getElementById('current_status').innerHTML = currentStatus(whatLessonNow(time), time);
+}, 1000); // Counting estimated time to the next lesson
+
+function estTime(type, time) {
+  var day = my_getWeekDay(currentDate(time)); // getting current day for friday check
+  // estimated time to break end
 
   if (type == 'break') {
-    var est = nextLesson().get_startTime().get_time();
+    var est = nextLesson(time).get_startTime().get_time();
     return secondsToTime(est - time, 'short');
-  }
+  } // estimated time to lesson end
+
 
   if (type == 'lesson') {
-    var _est = whatLesson().get_endTime().get_time();
+    var _est = whatLessonNow(time).get_endTime().get_time();
 
     return secondsToTime(_est - time, 'short');
-  }
+  } // estimated time to the start of first lesson today
 
-  if (type == 'weekend') {
-    var _est2 = nextLesson().get_startTime().get_time();
+
+  if (type == 'before') {
+    var _est2 = nextLesson(time).get_startTime().get_time();
 
     return secondsToTime(_est2 - time, 'long');
+  } // estimated time to the start of first lesson tomorrow
+
+
+  if (type == 'after') {
+    var _est3 = nextLesson(time).get_startTime().get_time();
+
+    if (day == friday) {
+      return secondsToTime(_est3 + timeToSeconds(24, 0, 0, friday) - time, 'long');
+    }
+
+    return secondsToTime(_est3 - time, 'long');
   }
 }
 //# sourceMappingURL=timer.dev.js.map
