@@ -1,6 +1,6 @@
 // Tracking current lesson and next lesson. And giving it to the page. Counting estimated time ti the next lesson
 
-
+    
 
 // Getting current lesson (object)
 function whatLessonNow(time) {

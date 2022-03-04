@@ -17,6 +17,10 @@ header {
     background-color: white;
 }
 
+header #current_status {
+    color: black;
+}
+
 .container {
     padding: 20px;
 }
@@ -67,10 +71,4 @@ header {
     font-weight: bold;
 
     margin: 0 0 5px 0 ;
-}
-
-
-/* Hiding old markup. New in JS */
-.container#old {
-    display: none;
 }
