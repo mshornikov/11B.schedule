@@ -1,6 +1,6 @@
 // Tracking current lesson and next lesson. And giving it to the page. Counting estimated time ti the next lesson
 
-    
+
 
 // Getting current lesson (object)
 function whatLessonNow(time) {
@@ -120,24 +120,6 @@ function nextLesson(time) {
     return next_lesson;
 }
 
-// Updating status in header
-
-
-// For fast download of web page
-let time = currentTime();
-document.getElementById('current_status').innerHTML = currentStatus(whatLessonNow(time), time);
-
-
-// timer for every second update
-setInterval(function () {
-
-    // Getting current time
-    let time = currentTime();
-
-    document.getElementById('current_status').innerHTML = currentStatus(whatLessonNow(time), time);
-
-}, 1000);
-
 // Counting estimated time to the next lesson
 function estTime(type, time) {
 
@@ -170,3 +152,20 @@ function estTime(type, time) {
         return secondsToTime(est - time, 'long');
     }
 }   
+
+
+// Updating status in header
+
+// For fast download of web page
+let time = currentTime();
+document.getElementById('current_status').innerHTML = currentStatus(whatLessonNow(time), time);
+
+// timer for every second update
+setInterval(function () {
+
+    // Getting current time
+    let time = currentTime();
+
+    document.getElementById('current_status').innerHTML = currentStatus(whatLessonNow(time), time);
+
+}, 1000);

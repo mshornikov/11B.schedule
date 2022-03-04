@@ -111,18 +111,8 @@ function nextLesson(time) {
 
 
   return next_lesson;
-} // Updating status in header
-// For fast download of web page
+} // Counting estimated time to the next lesson
 
-
-var time = currentTime();
-document.getElementById('current_status').innerHTML = currentStatus(whatLessonNow(time), time); // timer for every second update
-
-setInterval(function () {
-  // Getting current time
-  var time = currentTime();
-  document.getElementById('current_status').innerHTML = currentStatus(whatLessonNow(time), time);
-}, 1000); // Counting estimated time to the next lesson
 
 function estTime(type, time) {
   var day = my_getWeekDay(currentDate(time)); // getting current day for friday check
@@ -157,5 +147,16 @@ function estTime(type, time) {
 
     return secondsToTime(_est3 - time, 'long');
   }
-}
+} // Updating status in header
+// For fast download of web page
+
+
+var time = currentTime();
+document.getElementById('current_status').innerHTML = currentStatus(whatLessonNow(time), time); // timer for every second update
+
+setInterval(function () {
+  // Getting current time
+  var time = currentTime();
+  document.getElementById('current_status').innerHTML = currentStatus(whatLessonNow(time), time);
+}, 1000);
 //# sourceMappingURL=timer.dev.js.map

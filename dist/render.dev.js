@@ -1,18 +1,25 @@
 "use strict";
 
 // Document HTML-code. Which makes from classes
-document.write('<!-- Container  -->');
+// HTML-comment for block
+document.write('<!-- Container  -->'); // Container and week declaration
+
 document.write('<div class="container">');
-document.write('<div class="week">');
+document.write('<div class="week">'); // Loop that writes every day in week
 
 for (i in week) {
-  if (i != 0 & i != 1) {
-    document.write('<!-- ', week[i].get_dayName(), ' -->');
+  // for everyone but not saturday and sunday
+  if (week[i].get_dayName() != 'Суббота' & week[i].get_dayName() != 'Воскресенье') {
+    // HTML-comment for block
+    document.write('<!-- ', week[i].get_dayName(), ' -->'); // Day block
+
     document.write('<article class="day">');
     document.write('<section class="day-header">', week[i].get_dayName(), '</section>');
 
     for (x in week[i].get_lessons()) {
-      document.write('<!-- ', week[i].get_lessons()[x].get_name(), ' -->');
+      // HTML-comment for block
+      document.write('<!-- ', week[i].get_lessons()[x].get_name(), ' -->'); // Lesson block
+
       document.write('<section class="lesson-line">');
       document.write('<section class="lesson-start-time">', week[i].get_lessons()[x].get_startTime().get_hours(), ':', zero_first_format(week[i].get_lessons()[x].get_startTime().get_minutes()), '</section>');
       document.write('<section class="lesson-column">');
