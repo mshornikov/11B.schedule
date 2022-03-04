@@ -47,7 +47,7 @@ function secondsToTime(time, length) {
       return ~~(time % 3600 / 60).toString() + ':' + zero_first_format(~~(time % 3600 % 60)).toString();
     }
 
-    return (~~(time / 24 % 3600 * 24 / 3600) + ~~(time / 24 / 3600) * 24).toString() + ':' + zero_first_format(~~(time % 3600 / 60)).toString() + ':' + zero_first_format(~~(time % 3600 % 60)).toString();
+    return (~~(time / 24 % 3600 * 24 / 3600) + ~~(time / 24 / 3600)).toString() + ':' + zero_first_format(~~(time % 3600 / 60)).toString() + ':' + zero_first_format(~~(time % 3600 % 60)).toString();
   }
 
   if (length == 'short') {
@@ -119,32 +119,7 @@ function whatLesson() {
 document.getElementById('current_status').innerHTML = whatLessonNow();
 setInterval(function () {
   document.getElementById('current_status').innerHTML = whatLessonNow(); // document.getElementById('est').innerHTML = estTime('lesson');
-}, 1000); // Document writing
-
-document.write('<div class="container">');
-document.write('<div class="week">');
-
-for (i in week) {
-  if (i != 0 & i != 1) {
-    document.write('<article class="day">');
-    document.write('<section class="day-header">', week[i].get_dayName(), '</section>');
-
-    for (x in week[i].get_lessons()) {
-      document.write('<section class="lesson-line">');
-      document.write('<section class="lesson-start-time">', week[i].get_lessons()[x].get_startTime().get_hours(), ':', zero_first_format(week[i].get_lessons()[x].get_startTime().get_minutes()), '</section>');
-      document.write('<section class="lesson-column">');
-      document.write('<section class="lesson-name">', week[i].get_lessons()[x].get_name(), '</section>');
-      document.write('<section class="lesson-end-time">', week[i].get_lessons()[x].get_endTime().get_hours(), ':', zero_first_format(week[i].get_lessons()[x].get_endTime().get_minutes()), '</section>');
-      document.write('</section>');
-      document.write('</section>');
-    }
-
-    document.write('</article>');
-  }
-}
-
-document.write('</div>');
-document.write('</div>'); // Function which understand which lesson is next
+}, 1000); // Function which understand which lesson is next
 
 function nextLesson() {
   // Current time declaration
@@ -197,7 +172,6 @@ function estTime(type) {
   var minutes = current_datetime.getMinutes();
   var seconds = current_datetime.getSeconds();
   var day = getWeekDay(current_datetime, week); // Converting time from 8:01:01 to 28861 for comparing
-  // var time = timeToSeconds(hours, minutes, seconds, day);
 
   var time = timeToSeconds(hours, minutes, seconds, day);
 

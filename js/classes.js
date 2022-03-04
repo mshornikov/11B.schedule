@@ -1,4 +1,8 @@
-// Classes
+// Classes. Days declaration. Lessons declaration. Week declaration
+
+
+
+// class contains hours, minutes, seconds and number of the day, and can give time in seconds
 class Time {
     constructor(hours, minutes, seconds, dayNumber) {
         this.hours = hours;
@@ -24,11 +28,16 @@ class Time {
     }
 
     get_time() {
-        return this.get_dayNumber() * 24 * 3600 + this.get_hours() * 3600 + this.get_minutes() * 60 + this.get_seconds();
-    }
+        var day = this.get_dayNumber() * 24 * 3600; // 24 hours per day and 3600 seconds per hour
+        var hours = this.get_hours() * 3600; // 3600 seconds per hour
+        var minutes = this.get_minutes() * 60; // 60 seconds per minute
+        var seconds = this.get_seconds();
 
+        return day + hours + minutes + seconds;
+    }
 }
 
+// class contains name of the day, amount of lessons, and array of lessons
 class Day {
     constructor(dayName, lessonAmount, lessons) {
         this.dayName = dayName;
@@ -47,9 +56,9 @@ class Day {
     get_lessons() {
         return this.lessons;
     }
-
 }
 
+// class contains name of the lesson, start time and end time in seconds
 class Lesson {
     constructor(name, startTime, endTime) {
         this.name = name;
@@ -91,13 +100,14 @@ new Lesson('Родной язык', new Time(11, 0, 0, 6), new Time(11, 40, 0, 6
 new Lesson('История', new Time(13, 30, 0, 6), new Time(14, 10, 0, 6))];
 
 // Days declaration
-var sunday = new Day('Воскресенье', 0, []);
-var monday = new Day('Понедельник', 7, mondayLessons);
-var tuesday = new Day('Вторник', 7, tuesdayLessons);
-var wednesday = new Day('Среда', 6, wednesdayLessons);
-var thursday = new Day('Четверг', 6, thursdayLessons);  
-var friday = new Day('Пятница', 7, fridayLessons);
-var saturday = new Day('Суббота', 0, []);
+var saturday = new Day('Суббота', 0, []); // number = 0
+var sunday = new Day('Воскресенье', 0, []); // number = 1
+var monday = new Day('Понедельник', 7, mondayLessons); // number = 2
+var tuesday = new Day('Вторник', 7, tuesdayLessons); // number = 3
+var wednesday = new Day('Среда', 6, wednesdayLessons); // number = 4
+var thursday = new Day('Четверг', 6, thursdayLessons);  // number = 5
+var friday = new Day('Пятница', 7, fridayLessons); // // number = 6
+
 
 // Week declaration
 var week = [saturday, sunday, monday, tuesday, wednesday, thursday, friday];
