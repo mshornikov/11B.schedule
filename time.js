@@ -85,7 +85,7 @@ function currentTime() {
 
 // Seconds counter for tests 
 {
-    var s = timeToSeconds(0, 0, 0, friday);
+    var s = timeToSeconds(0, 0, 0, monday);
     
     function currentTimeTest() {
         s += 20;
