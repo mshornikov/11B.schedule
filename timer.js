@@ -42,27 +42,47 @@ function currentStatus(status, time) {
 
     // lesson
     if (toString.call(status) == '[object Object]') {
-        return 'Сейчас: ' + status.get_name() + ' ' + estTime('lesson', time);
+        document.getElementById('current_subtitle').innerHTML = 'Сейчас';
+        document.getElementById('current_status').innerHTML = status.get_name();
+        document.getElementById('current_time_name').innerHTML = 'Осталось';
+        document.getElementById('current_time').innerHTML = estTime('lesson', time);
+        document.getElementById('week').style.margin = '110px 0 0 0';
     }
 
     // break
     if (status == 'break') {
-        return 'Перемена. Cледующий урок: ' + nextLesson(time).get_name() + ' До урока ' + estTime('break', time);
+        document.getElementById('current_subtitle').innerHTML = 'Сейчас';
+        document.getElementById('current_status').innerHTML = 'Перемена';
+        document.getElementById('current_time_name').innerHTML = 'До ' + nextLesson(time).get_additionalName();
+        document.getElementById('current_time').innerHTML = estTime('break', time);
+        document.getElementById('week').style.margin = '110px 0 0 0';
     }
 
     // time before lessons
     if (status == 'before') {
-        return 'Уроки ещё не начались. Первый урок: ' + nextLesson(time).get_name() + ' До урока: ' + estTime('before', time);
+        document.getElementById('current_subtitle').innerHTML = 'Сейчас';
+        document.getElementById('current_status').innerHTML = 'Уроки ещё не начались';
+        document.getElementById('current_time_name').innerHTML = 'До ' + nextLesson(time).get_additionalName();
+        document.getElementById('current_time').innerHTML = estTime('before', time);
+        document.getElementById('week').style.margin = '140px 0 0 0';
     }
 
     // time after lessons
     if (status == 'after') {
-        return 'Уроки уже закончились' + ' До уроков: ' + estTime('after', time);
+        document.getElementById('current_subtitle').innerHTML = 'Сейчас';
+        document.getElementById('current_status').innerHTML = 'Уроки уже закончились';
+        document.getElementById('current_time_name').innerHTML = 'До ' + nextLesson(time).get_additionalName();
+        document.getElementById('current_time').innerHTML = estTime('after', time);
+        document.getElementById('week').style.margin = '140px 0 0 0';
     }
 
     // weekend
     if (status == 'weekend') {
-        return 'Сегодня выходной' + ' До уроков: ' + estTime('before', time);
+        document.getElementById('current_subtitle').innerHTML = 'Сегодня';
+        document.getElementById('current_status').innerHTML = 'Выходной';
+        document.getElementById('current_time_name').innerHTML = 'До уроков:';
+        document.getElementById('current_time').innerHTML = estTime('before', time).toString();
+        document.getElementById('week').style.margin = '110px 0 0 0';
     }
 }
 
@@ -158,7 +178,7 @@ function estTime(type, time) {
 
 // For fast download of web page
 let time = currentTime();
-document.getElementById('current_status').innerHTML = currentStatus(whatLessonNow(time), time);
+currentStatus(whatLessonNow(time), time);
 
 // timer for every second update
 setInterval(function () {
@@ -166,6 +186,6 @@ setInterval(function () {
     // Getting current time
     let time = currentTime();
 
-    document.getElementById('current_status').innerHTML = currentStatus(whatLessonNow(time), time);
+    currentStatus(whatLessonNow(time), time);
 
 }, 1000);

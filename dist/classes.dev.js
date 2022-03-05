@@ -6,7 +6,8 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-// Classes
+// Classes. Days declaration. Lessons declaration. Week declaration
+// class contains hours, minutes, seconds and number of the day, and can give time in seconds
 var Time =
 /*#__PURE__*/
 function () {
@@ -42,12 +43,20 @@ function () {
   }, {
     key: "get_time",
     value: function get_time() {
-      return this.get_dayNumber() * 24 * 3600 + this.get_hours() * 3600 + this.get_minutes() * 60 + this.get_seconds();
+      var day = this.get_dayNumber() * 24 * 3600; // 24 hours per day and 3600 seconds per hour
+
+      var hours = this.get_hours() * 3600; // 3600 seconds per hour
+
+      var minutes = this.get_minutes() * 60; // 60 seconds per minute
+
+      var seconds = this.get_seconds();
+      return day + hours + minutes + seconds;
     }
   }]);
 
   return Time;
-}();
+}(); // class contains name of the day, amount of lessons, and array of lessons
+
 
 var Day =
 /*#__PURE__*/
@@ -78,17 +87,19 @@ function () {
   }]);
 
   return Day;
-}();
+}(); // class contains name of the lesson, start time and end time in seconds
+
 
 var Lesson =
 /*#__PURE__*/
 function () {
-  function Lesson(name, startTime, endTime) {
+  function Lesson(name, additional_name, startTime, endTime) {
     _classCallCheck(this, Lesson);
 
     this.name = name;
     this.startTime = startTime;
     this.endTime = endTime;
+    this.additional_name = additional_name; // Name for future usage
   }
 
   _createClass(Lesson, [{
@@ -106,25 +117,37 @@ function () {
     value: function get_endTime() {
       return this.endTime;
     }
+  }, {
+    key: "get_additionalName",
+    value: function get_additionalName() {
+      return this.additional_name;
+    }
   }]);
 
   return Lesson;
 }(); // Lessons declaration
 
 
-var mondayLessons = [new Lesson('Математика', new Time(8, 15, 0, 2), new Time(8, 55, 0, 2)), new Lesson('Химия', new Time(9, 5, 0, 2), new Time(9, 45, 0, 2)), new Lesson('Математика', new Time(10, 5, 0, 2), new Time(10, 45, 0, 2)), new Lesson('Обществознание', new Time(11, 0, 0, 2), new Time(11, 40, 0, 2)), new Lesson('Литература', new Time(11, 50, 0, 2), new Time(12, 30, 0, 2)), new Lesson('Английский язык', new Time(12, 40, 0, 2), new Time(13, 20, 0, 2)), new Lesson('ОБЖ', new Time(13, 30, 0, 2), new Time(14, 10, 0, 2))];
-var tuesdayLessons = [new Lesson('Математика', new Time(8, 15, 0, 3), new Time(8, 55, 0, 3)), new Lesson('Русский язык', new Time(9, 5, 0, 3), new Time(9, 45, 0, 3)), new Lesson('Английский язык', new Time(10, 5, 0, 3), new Time(10, 45, 0, 3)), new Lesson('История', new Time(11, 0, 0, 3), new Time(11, 40, 0, 3)), new Lesson('Литература', new Time(11, 50, 0, 3), new Time(12, 30, 0, 3)), new Lesson('География', new Time(12, 40, 0, 3), new Time(13, 20, 0, 3)), new Lesson('Физика', new Time(13, 30, 0, 3), new Time(14, 10, 0, 3))];
-var wednesdayLessons = [new Lesson('Литература', new Time(9, 5, 0, 4), new Time(9, 45, 0, 4)), new Lesson('Физкультура', new Time(10, 5, 0, 4), new Time(10, 45, 0, 4)), new Lesson('Астрономия', new Time(11, 0, 0, 4), new Time(11, 40, 0, 4)), new Lesson('Экономика', new Time(11, 50, 0, 4), new Time(12, 30, 0, 4)), new Lesson('Право', new Time(12, 40, 0, 4), new Time(13, 20, 0, 4)), new Lesson('Английский язык', new Time(13, 30, 0, 4), new Time(14, 10, 0, 4))];
-var thursdayLessons = [new Lesson('Математика', new Time(8, 15, 0, 5), new Time(8, 55, 0, 5)), new Lesson('Информатика', new Time(9, 5, 0, 5), new Time(9, 45, 0, 5)), new Lesson('Обществознание', new Time(10, 5, 0, 5), new Time(10, 45, 0, 5)), new Lesson('Право', new Time(11, 0, 0, 5), new Time(11, 40, 0, 5)), new Lesson('Математика', new Time(11, 50, 0, 5), new Time(12, 30, 0, 5)), new Lesson('Физкультура', new Time(12, 40, 0, 5), new Time(13, 20, 0, 5))];
-var fridayLessons = [new Lesson('Физкультура', new Time(8, 15, 0, 6), new Time(8, 55, 0, 6)), new Lesson('Математика', new Time(9, 5, 0, 6), new Time(9, 45, 0, 6)), new Lesson('Физика', new Time(10, 5, 0, 6), new Time(10, 45, 0, 6)), new Lesson('Родной язык', new Time(11, 0, 0, 6), new Time(11, 40, 0, 6)), new Lesson('Экономика', new Time(11, 50, 0, 6), new Time(12, 30, 0, 6)), new Lesson('Биология', new Time(12, 40, 0, 6), new Time(13, 20, 0, 6)), new Lesson('История', new Time(13, 30, 0, 6), new Time(14, 10, 0, 6))]; // Days declaration
+var mondayLessons = [new Lesson('Математика', 'Математики', new Time(8, 15, 0, 2), new Time(8, 55, 0, 2)), new Lesson('Химия', 'Химии', new Time(9, 5, 0, 2), new Time(9, 45, 0, 2)), new Lesson('Математика', 'Математики', new Time(10, 5, 0, 2), new Time(10, 45, 0, 2)), new Lesson('Обществознание', 'Обществознания', new Time(11, 0, 0, 2), new Time(11, 40, 0, 2)), new Lesson('Литература', 'Литературы', new Time(11, 50, 0, 2), new Time(12, 30, 0, 2)), new Lesson('Английский язык', 'Английского языка', new Time(12, 40, 0, 2), new Time(13, 20, 0, 2)), new Lesson('ОБЖ', 'ОБЖ', new Time(13, 30, 0, 2), new Time(14, 10, 0, 2))];
+var tuesdayLessons = [new Lesson('Математика', 'Математики', new Time(8, 15, 0, 3), new Time(8, 55, 0, 3)), new Lesson('Русский язык', 'Русского языка', new Time(9, 5, 0, 3), new Time(9, 45, 0, 3)), new Lesson('Английский язык', 'Английского языка', new Time(10, 5, 0, 3), new Time(10, 45, 0, 3)), new Lesson('История', 'Истории', new Time(11, 0, 0, 3), new Time(11, 40, 0, 3)), new Lesson('Литература', 'Литературы', new Time(11, 50, 0, 3), new Time(12, 30, 0, 3)), new Lesson('География', 'Географии', new Time(12, 40, 0, 3), new Time(13, 20, 0, 3)), new Lesson('Физика', 'Физики', new Time(13, 30, 0, 3), new Time(14, 10, 0, 3))];
+var wednesdayLessons = [new Lesson('Литература', 'Литературы', new Time(9, 5, 0, 4), new Time(9, 45, 0, 4)), new Lesson('Физкультура', 'Физкультуры', new Time(10, 5, 0, 4), new Time(10, 45, 0, 4)), new Lesson('Астрономия', 'Астрономии', new Time(11, 0, 0, 4), new Time(11, 40, 0, 4)), new Lesson('Экономика', 'Экономики', new Time(11, 50, 0, 4), new Time(12, 30, 0, 4)), new Lesson('Право', 'Права', new Time(12, 40, 0, 4), new Time(13, 20, 0, 4)), new Lesson('Английский язык', 'Английского языка', new Time(13, 30, 0, 4), new Time(14, 10, 0, 4))];
+var thursdayLessons = [new Lesson('Математика', 'Математики', new Time(8, 15, 0, 5), new Time(8, 55, 0, 5)), new Lesson('Информатика', 'Информатики', new Time(9, 5, 0, 5), new Time(9, 45, 0, 5)), new Lesson('Обществознание', 'Общестовзнания', new Time(10, 5, 0, 5), new Time(10, 45, 0, 5)), new Lesson('Право', 'Права', new Time(11, 0, 0, 5), new Time(11, 40, 0, 5)), new Lesson('Математика', 'Математики', new Time(11, 50, 0, 5), new Time(12, 30, 0, 5)), new Lesson('Физкультура', 'Физкультуры', new Time(12, 40, 0, 5), new Time(13, 20, 0, 5))];
+var fridayLessons = [new Lesson('Физкультура', 'Физкультуры', new Time(8, 15, 0, 6), new Time(8, 55, 0, 6)), new Lesson('Математика', 'Математики', new Time(9, 5, 0, 6), new Time(9, 45, 0, 6)), new Lesson('Физика', 'Физики', new Time(10, 5, 0, 6), new Time(10, 45, 0, 6)), new Lesson('Родной язык', 'Родного языка', new Time(11, 0, 0, 6), new Time(11, 40, 0, 6)), new Lesson('Экономика', 'Экономики', new Time(11, 50, 0, 6), new Time(12, 30, 0, 6)), new Lesson('Биология', 'Биологии', new Time(12, 40, 0, 6), new Time(13, 20, 0, 6)), new Lesson('История', 'Истории', new Time(13, 30, 0, 6), new Time(14, 10, 0, 6))]; // Days declaration
 
-var sunday = new Day('Воскресенье', 0, []);
-var monday = new Day('Понедельник', 7, mondayLessons);
-var tuesday = new Day('Вторник', 7, tuesdayLessons);
-var wednesday = new Day('Среда', 6, wednesdayLessons);
-var thursday = new Day('Четверг', 6, thursdayLessons);
-var friday = new Day('Пятница', 7, fridayLessons);
-var saturday = new Day('Суббота', 0, []); // Week declaration
+var saturday = new Day('Суббота', 0, []); // number = 0
+
+var sunday = new Day('Воскресенье', 0, []); // number = 1
+
+var monday = new Day('Понедельник', 7, mondayLessons); // number = 2
+
+var tuesday = new Day('Вторник', 7, tuesdayLessons); // number = 3
+
+var wednesday = new Day('Среда', 6, wednesdayLessons); // number = 4
+
+var thursday = new Day('Четверг', 6, thursdayLessons); // number = 5
+
+var friday = new Day('Пятница', 7, fridayLessons); // // number = 6
+// Week declaration
 
 var week = [saturday, sunday, monday, tuesday, wednesday, thursday, friday];
 //# sourceMappingURL=classes.dev.js.map

@@ -6,7 +6,7 @@ document.write('<!-- Container  -->');
 
 // Container and week declaration
 document.write('<div class="container">');
-document.write('<div class="week">');
+document.write('<div class="week" id="week">');
 
 // Loop that writes every day in week
 for (i in week) {
