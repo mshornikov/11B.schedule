@@ -8,7 +8,6 @@ document.write('<!-- Container  -->');
 document.write('<div class="container">');
 document.write('<div class="week">');
 
-
 // Loop that writes every day in week
 for (i in week) {
 
