@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="192" height="192" viewBox="0 0 1000 1000">
+  <defs>
+    <style>
+      .cls-1, .cls-3 {
+        fill: #fff;
+      }
+
+      .cls-2 {
+        fill: #ff4343;
+      }
+
+      .cls-3 {
+        font-size: 183.333px;
+        font-family: "Yaro Rg";
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+    </style>
+  </defs>
+  <g id="Монтажная_область_1_копия_5" data-name="Монтажная область 1 копия 5">
+    <circle id="Эллипс_1" data-name="Эллипс 1" class="cls-1" cx="500.5" cy="500.5" r="487.625"/>
+    <rect id="Прямоугольник_1" data-name="Прямоугольник 1" class="cls-2" x="-16" y="-10" width="1048" height="1024"/>
+    <text id="СССР" class="cls-3" transform="translate(112.262 612.708) scale(1.322)">СССР</text>
+  </g>
+</svg>
