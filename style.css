@@ -111,6 +111,10 @@ header {
     margin: 0 0 5px 0 ;
 }
 
+footer.footer {
+    margin-top: 15vh;
+}
+
 .footer-column {
     display: flex;
     flex-direction: column;
