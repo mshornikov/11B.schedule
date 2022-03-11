@@ -121,7 +121,7 @@ footer.footer {
     align-items: baseline;
 }
 
-.feadback-button {
+.feedback-button {
     font-weight: bold;
 
     padding: 10px 15px 10px 15px;
@@ -136,7 +136,7 @@ footer.footer {
     color: #333333;
 }
 
-.feadback-button:hover {
+.feedback-button:hover {
     transform: scale(1.05);
     background-color: #f7e523;  
 }

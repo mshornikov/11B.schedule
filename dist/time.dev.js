@@ -1,6 +1,6 @@
 "use strict";
 
-// All functons working with getting, converting currrent time and date
+// All functions working with getting, converting current time and date
 // Convert time to seconds (from 8:01:01 to 28861)
 function timeToSeconds(hours, minutes, seconds, day) {
   var dayNumber = week.indexOf(day); // Converting time
@@ -37,7 +37,7 @@ function currentDate(time) {
 
 function getDayNumber(day) {
   return dayNumber = week.indexOf(day);
-} // Replacing day number to day object ('0' -> saturday[obj]) (from current_datetime). Usual system, where sunday is the first day and saturday the last day of the week
+} // Replacing day number to day object ('0' -> saturday[obj]) (from current_dateTime). Usual system, where sunday is the first day and saturday the last day of the week
 
 
 function getWeekDay(date) {
@@ -63,12 +63,12 @@ function zero_first_format(value) {
 
 function currentTime() {
   // Current time declaration
-  var current_datetime = new Date();
-  var hours = current_datetime.getHours();
-  var minutes = current_datetime.getMinutes();
-  var seconds = current_datetime.getSeconds(); // Comment for tests
+  var current_dateTime = new Date();
+  var hours = current_dateTime.getHours();
+  var minutes = current_dateTime.getMinutes();
+  var seconds = current_dateTime.getSeconds(); // Comment for tests
 
-  var day = getWeekDay(current_datetime.getDay()); // Uncomment for tests
+  var day = getWeekDay(current_dateTime.getDay()); // Uncomment for tests
   // return currentTimeTest();  
 
   return timeToSeconds(hours, minutes, seconds, day);
