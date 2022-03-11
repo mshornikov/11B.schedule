@@ -118,7 +118,7 @@ function nextLesson(time) {
     if (time >= lesson.get_startTime().get_time() & time <= lesson.get_endTime().get_time()) {
       // exclusion for last lesson at friday
       if (day == friday & lesson == day.get_lessons(day.get_lessonAmount() - 1)) {
-        return weel[0].get_lessons()[0];
+        return week[0].get_lessons()[0];
       }
 
       return day.get_lessons()[_i + 1];
