@@ -55,7 +55,7 @@ function currentStatus(status, time) {
         document.getElementById('current_status').innerHTML = 'Перемена';
         document.getElementById('current_time_name').innerHTML = 'До ' + nextLesson(time).get_additionalName();
         document.getElementById('current_time').innerHTML = estTime('break', time);
-        // document.getElementById('week').style.margin = '110px 0 0 0';
+        document.getElementById('week').style.margin = '120px 0 0 0';
     }
 
     // time before lessons
@@ -64,7 +64,7 @@ function currentStatus(status, time) {
         document.getElementById('current_status').innerHTML = 'Уроки ещё не начались';
         document.getElementById('current_time_name').innerHTML = 'До ' + nextLesson(time).get_additionalName();
         document.getElementById('current_time').innerHTML = estTime('before', time);
-        // document.getElementById('week').style.margin = '140px 0 0 0';
+        document.getElementById('week').style.margin = '150px 0 0 0';
     }
 
     // time after lessons
@@ -73,7 +73,7 @@ function currentStatus(status, time) {
         document.getElementById('current_status').innerHTML = 'Уроки уже закончились';
         document.getElementById('current_time_name').innerHTML = 'До ' + nextLesson(time).get_additionalName();
         document.getElementById('current_time').innerHTML = estTime('after', time);
-        // document.getElementById('week').style.margin = '140px 0 0 0';
+        document.getElementById('week').style.margin = '150px 0 0 0';
     }
 
     // weekend
@@ -82,7 +82,7 @@ function currentStatus(status, time) {
         document.getElementById('current_status').innerHTML = 'Выходной';
         document.getElementById('current_time_name').innerHTML = 'До уроков:';
         document.getElementById('current_time').innerHTML = estTime('before', time).toString();
-        // document.getElementById('week').style.margin = '110px 0 0 0';
+        document.getElementById('week').style.margin = '120px 0 0 0';
     }
 }
 
@@ -127,7 +127,7 @@ function nextLesson(time) {
 
             // exclusion for last lesson at friday
             if (day == friday & lesson == day.get_lessons(day.get_lessonAmount() - 1)) {
-                return weel[0].get_lessons()[0];
+                return week[0].get_lessons()[0];
             }
             return day.get_lessons()[i+1];
         }

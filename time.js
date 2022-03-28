@@ -1,4 +1,4 @@
-// All functons working with getting, converting currrent time and date
+// All functions working with getting, converting current time and date
 
 
 
@@ -45,7 +45,7 @@ function getDayNumber(day) {
     return dayNumber = week.indexOf(day);
 }
 
-// Replacing day number to day object ('0' -> saturday[obj]) (from current_datetime). Usual system, where sunday is the first day and saturday the last day of the week
+// Replacing day number to day object ('0' -> saturday[obj]) (from current_dateTime). Usual system, where sunday is the first day and saturday the last day of the week
 function getWeekDay(date) {
     var week = [sunday, monday, tuesday, wednesday, thursday, friday, saturday];
     return week[date];
@@ -69,13 +69,13 @@ function zero_first_format(value) {
 function currentTime() {
 
     // Current time declaration
-    var current_datetime = new Date();
-    var hours = current_datetime.getHours();
-    var minutes = current_datetime.getMinutes();
-    var seconds = current_datetime.getSeconds();
+    var current_dateTime = new Date();
+    var hours = current_dateTime.getHours();
+    var minutes = current_dateTime.getMinutes();
+    var seconds = current_dateTime.getSeconds();
 
     // Comment for tests
-    var day = getWeekDay(current_datetime.getDay());
+    var day = getWeekDay(current_dateTime.getDay());
 
     // Uncomment for tests
     // return currentTimeTest();  
