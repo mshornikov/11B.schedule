@@ -46,7 +46,7 @@ function currentStatus(status, time) {
         document.getElementById('current_status').innerHTML = status.get_name();
         document.getElementById('current_time_name').innerHTML = 'Осталось';
         document.getElementById('current_time').innerHTML = estTime('lesson', time);
-        document.getElementById('week').style.margin = '110px 0 0 0';
+        // document.getElementById('week').style.margin = '110px 0 0 0';
     }
 
     // break
@@ -55,7 +55,7 @@ function currentStatus(status, time) {
         document.getElementById('current_status').innerHTML = 'Перемена';
         document.getElementById('current_time_name').innerHTML = 'До ' + nextLesson(time).get_additionalName();
         document.getElementById('current_time').innerHTML = estTime('break', time);
-        document.getElementById('week').style.margin = '110px 0 0 0';
+        // document.getElementById('week').style.margin = '110px 0 0 0';
     }
 
     // time before lessons
@@ -64,7 +64,7 @@ function currentStatus(status, time) {
         document.getElementById('current_status').innerHTML = 'Уроки ещё не начались';
         document.getElementById('current_time_name').innerHTML = 'До ' + nextLesson(time).get_additionalName();
         document.getElementById('current_time').innerHTML = estTime('before', time);
-        document.getElementById('week').style.margin = '140px 0 0 0';
+        // document.getElementById('week').style.margin = '140px 0 0 0';
     }
 
     // time after lessons
@@ -73,7 +73,7 @@ function currentStatus(status, time) {
         document.getElementById('current_status').innerHTML = 'Уроки уже закончились';
         document.getElementById('current_time_name').innerHTML = 'До ' + nextLesson(time).get_additionalName();
         document.getElementById('current_time').innerHTML = estTime('after', time);
-        document.getElementById('week').style.margin = '140px 0 0 0';
+        // document.getElementById('week').style.margin = '140px 0 0 0';
     }
 
     // weekend
@@ -82,7 +82,7 @@ function currentStatus(status, time) {
         document.getElementById('current_status').innerHTML = 'Выходной';
         document.getElementById('current_time_name').innerHTML = 'До уроков:';
         document.getElementById('current_time').innerHTML = estTime('before', time).toString();
-        document.getElementById('week').style.margin = '110px 0 0 0';
+        // document.getElementById('week').style.margin = '110px 0 0 0';
     }
 }
 
@@ -178,6 +178,7 @@ function estTime(type, time) {
 
 // For fast download of web page
 let time = currentTime();
+let day = my_getWeekDay(currentDate(time));
 currentStatus(whatLessonNow(time), time);
 
 // timer for every second update
@@ -189,3 +190,25 @@ setInterval(function () {
     currentStatus(whatLessonNow(time), time);
 
 }, 1000);
+
+
+// Finding position of the object
+function findPos(obj) {
+    var curleft = curtop = 0;
+
+    if (obj.offsetParent) {
+        do {
+            curleft += obj.offsetLeft;
+            curtop += obj.offsetTop;
+        } while (obj = obj.offsetParent);
+
+        return [curleft, curtop];
+    }
+}
+
+// Scrolling to the current day
+window.scrollTo({
+    left: 0,
+    top: findPos(document.getElementById('friday'))[1] - 140,
+    behavior: 'smooth'
+});

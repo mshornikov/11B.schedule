@@ -6,7 +6,7 @@ document.write('<!-- Container  -->');
 
 // Container and week declaration
 document.write('<div class="container">');
-document.write('<div class="week" id="week">');
+document.write('<div class="week">');
 
 // Loop that writes every day in week
 for (i in week) {
@@ -17,8 +17,8 @@ for (i in week) {
         document.write('<!-- ', week[i].get_dayName(),  ' -->');
 
         // Day block
-        document.write('<article class="day">');
-        document.write('<section class="day-header">', week[i].get_dayName(), '</section>');
+        document.write('<article class="day" id="day-', week[i].get_name(), '">');
+        document.write('<a href="#', week[i].get_name(), '"> <section class="day-header" id="', week[i].get_name(),'">',  week[i].get_dayName(), '</section> </a>');
         
         for (x in week[i].get_lessons()) {
             // HTML-comment for block
