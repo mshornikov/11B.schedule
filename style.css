@@ -18,6 +18,8 @@ header {
     position: fixed;
     background-color: #FF4343;
     color: white;
+
+    z-index: 1000;
 }
 
 .current_subtitle {
@@ -79,6 +81,13 @@ header {
     margin: 0 60px 30px 0;
 }
 
+/* .day-header::before {
+    display: block;
+    content: '';
+    height: 130px;
+ 
+} */
+
 .day-header {
     font-size: 22px;
     font-weight: bold;
@@ -139,4 +148,34 @@ footer.footer {
 .feedback-button:hover {
     transform: scale(1.05);
     background-color: #f7e523;  
+}
+
+/* .day#day-monday {
+    z-index: 5;
+}
+
+.day#day-tuesday {
+    top: 500px;
+    z-index: 4;
+}
+
+.day#day-wednesday {
+    top: 950px;
+    z-index: 3;
+    background-color: #f7e523;
+}
+
+.day#day-thursday {
+    top: 1500px;
+    z-index: 2;
+}
+
+.day#day-friday {
+    top: 2000px;
+    z-index: 1;
+} */
+
+.day#day-friday::after {
+    content: '';
+    height: 300px;
 }

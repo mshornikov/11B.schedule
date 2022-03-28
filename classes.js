@@ -39,12 +39,17 @@ class Time {
 
 // class contains name of the day, amount of lessons, and array of lessons
 class Day {
-    constructor(dayName, lessonAmount, lessons) {
+    constructor(dayName, name, lessonAmount, lessons) {
         this.dayName = dayName;
         this.lessonAmount = lessonAmount;
         this.lessons = lessons;
+        this.name = name;
     }
 
+    get_name() {
+        return this.name;
+    }
+    
     get_dayName() {
         return this.dayName;
     }
@@ -118,13 +123,13 @@ for (var i = 0; i < lessonsArray.length; i++) {
 }
 
 // Days declaration
-var saturday = new Day('Суббота', 0, []); // number = 0
-var sunday = new Day('Воскресенье', 0, []); // number = 1
-var monday = new Day('Понедельник', 7, lessonsArray[0]); // number = 2
-var tuesday = new Day('Вторник', 7, lessonsArray[1]); // number = 3
-var wednesday = new Day('Среда', 6, lessonsArray[2]); // number = 4
-var thursday = new Day('Четверг', 6, lessonsArray[3]);  // number = 5
-var friday = new Day('Пятница', 7, lessonsArray[4]); // // number = 6
+var saturday = new Day('Суббота', 'saturday',  0, []); // number = 0
+var sunday = new Day('Воскресенье', 'sunday', 0, []); // number = 1
+var monday = new Day('Понедельник', 'monday', 7, mondayLessons); // number = 2
+var tuesday = new Day('Вторник', 'tuesday', 7, tuesdayLessons); // number = 3
+var wednesday = new Day('Среда', 'wednesday', 6, wednesdayLessons); // number = 4
+var thursday = new Day('Четверг', 'thursday', 6, thursdayLessons);  // number = 5
+var friday = new Day('Пятница', 'friday', 7, fridayLessons); // // number = 6
 
 
 // Week declaration
