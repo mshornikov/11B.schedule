@@ -88,7 +88,7 @@ function currentTime() {
     var s = timeToSeconds(0, 0, 0, monday);
     
     function currentTimeTest() {
-        s += 20;
+        s += 1424;
         return s % 604800;
     }
 }

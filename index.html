@@ -45,7 +45,8 @@
 <body>
     <!-- Wrapping block -->
     <div class="wrapper">
-    <header>
+
+    <header onclick="scroll_to(my_getWeekDay(currentDate(currentTime())), whatStatusNow(time))">
         <div class="current_subtitle" id="current_subtitle"></div>
         <div class='current_status' id="current_status"></div>
         <div class="current_time_line">
@@ -54,10 +55,11 @@
         </div>
     </header>
 
+
     <script type="text/javascript" src="classes.js"></script>
     <script type="text/javascript" src="time.js"></script>
     <script type="text/javascript" src="render.js"></script>
-    <script type="text/javascript" src="timer.js"></script>
+    
     
 
     <!-- Footer -->
@@ -70,5 +72,6 @@
         </div>
     </footer>
     </div>
+    <script type="text/javascript" src="statusHandler.js"></script>
 </body>
 </html>
