@@ -97,6 +97,10 @@ header:hover {
     margin-bottom: 10px;
 }
 
+.day:hover {
+    cursor: pointer;
+}
+
 .lesson-line {
     display: flex;
     flex-direction: row;
