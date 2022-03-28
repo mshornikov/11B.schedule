@@ -10,7 +10,8 @@ document.write('<div class="week" id="week">');
 
 // Loop that writes every day in week
 for (i in week) {
-
+    let time = currentTime();
+    var today = my_getWeekDay(currentDate(time));
     // for everyone but not saturday and sunday
     if (week[i].get_dayName() != 'Суббота' & week[i].get_dayName() != 'Воскресенье') {
         // HTML-comment for block
