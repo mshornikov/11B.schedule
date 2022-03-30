@@ -18,8 +18,8 @@ for (i in week) {
         document.write('<!-- ', week[i].get_dayName(),  ' -->');
 
         // Day block
-        document.write('<article onclick="scroll_to(', week[i].get_name(), ',)" class="day" id="day-', week[i].get_name(), '">');
-        document.write('<div class="day-header" id="', week[i].get_name(),'">',  week[i].get_dayName(), '</div>');
+        document.write('<article onclick="scroll_to(', week[i].get_name(), ',)" class="day" id="', week[i].get_name(), '">');
+        document.write('<div class="day-header">',  week[i].get_dayName(), '</div>');
         
         for (x in week[i].get_lessons()) {
             // HTML-comment for block

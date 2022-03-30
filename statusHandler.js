@@ -185,13 +185,9 @@ let time = currentTime();
 let day = my_getWeekDay(currentDate(time));
 
 // Scroll to current day on launch
-// window.scrollTo({
-//     left: 0,
-//     top: findPos(document.getElementById(day.get_name()))[1] - 130,
-//     behavior: 'smooth'
-// });
-scroll_to(day, whatStatusNow(time));
-
+window.onload = function () {
+    scroll_to(day, whatStatusNow(time));
+}
 
 currentStatus(whatStatusNow(time), time);
 
@@ -206,17 +202,17 @@ setInterval(function () {
 }, 1000);
 
 
+
 // Finding position of the object
 function findPos(obj) {
-    var curleft = curtop = 0;
-
+    var curtop = 0;
+  
     if (obj.offsetParent) {
         do {
-            curleft += obj.offsetLeft;
             curtop += obj.offsetTop;
         } while (obj = obj.offsetParent);
 
-        return [curleft, curtop];
+        return curtop;
     }
 }
 
@@ -225,44 +221,47 @@ function scroll_to(day, status) {
 
     // weekends
     if (day == saturday | day == sunday) {
-        window.scroll({
+        console.log(1);
+        window.scrollTo({
             left: 0,
-            top: findPos(document.getElementById('monday'))[1] - 170,
+            top: findPos(document.getElementById('monday')) - 170,
             behavior: 'smooth'
         });
     } 
     // friday evening
     else if (day == friday & status == 'after') {
-        window.scroll({
+        console.log(2);
+        window.scrollTo({
             left: 0,
-            top: findPos(document.getElementById('monday'))[1] - 170,
+            top: findPos(document.getElementById('monday')) - 170,
             behavior: 'smooth'
         });
     } 
     // evening
     else if (status == 'after') {
         nextDay = my_getWeekDay(getDayNumber(day) + 1);
-    
-        window.scroll({
+        console.log(3);
+        window.scrollTo({
             left: 0,
-            top: findPos(document.getElementById(nextDay.get_name()))[1] - 170,
+            top: findPos(document.getElementById(nextDay.get_name())) - 170,
             behavior: 'smooth'
         });
     } 
     // usual
     else if (status == 'before') {
+        console.log(4);
         window.scrollTo({
             left: 0,
-            top: findPos(document.getElementById(day.get_name()))[1] - 170,
+            top: findPos(document.getElementById(day.get_name())) - 170,
             behavior: 'smooth'
         });
     }
     else {
+    console.log(5);
     window.scrollTo({
         left: 0,
-        top: findPos(document.getElementById(day.get_name()))[1] - 130,
+        top: findPos(document.getElementById(day.get_name())) - 170,
         behavior: 'smooth'
     });
     }
-    
 }
