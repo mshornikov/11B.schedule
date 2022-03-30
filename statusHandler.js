@@ -185,11 +185,13 @@ let time = currentTime();
 let day = my_getWeekDay(currentDate(time));
 
 // Scroll to current day on launch
-window.scrollTo({
-    left: 0,
-    top: findPos(document.getElementById('tuesday'))[1] - 130,
-    behavior: 'smooth'
-});
+// window.scrollTo({
+//     left: 0,
+//     top: findPos(document.getElementById(day.get_name()))[1] - 130,
+//     behavior: 'smooth'
+// });
+scroll_to(day, whatStatusNow(time));
+
 
 currentStatus(whatStatusNow(time), time);
 
@@ -221,17 +223,9 @@ function findPos(obj) {
 // Scrolling to the current day
 function scroll_to(day, status) {
 
-    if (day.type == String) {
-        window.scrollTo({
-            left: 0,
-            top: findPos(document.getElementById(day))[1] - 170,
-            behavior: 'smooth'
-        });
-    }
-
     // weekends
     if (day == saturday | day == sunday) {
-        window.scrollTo({
+        window.scroll({
             left: 0,
             top: findPos(document.getElementById('monday'))[1] - 170,
             behavior: 'smooth'
@@ -239,7 +233,7 @@ function scroll_to(day, status) {
     } 
     // friday evening
     else if (day == friday & status == 'after') {
-        window.scrollTo({
+        window.scroll({
             left: 0,
             top: findPos(document.getElementById('monday'))[1] - 170,
             behavior: 'smooth'
@@ -249,19 +243,26 @@ function scroll_to(day, status) {
     else if (status == 'after') {
         nextDay = my_getWeekDay(getDayNumber(day) + 1);
     
-        window.scrollTo({
+        window.scroll({
             left: 0,
             top: findPos(document.getElementById(nextDay.get_name()))[1] - 170,
             behavior: 'smooth'
         });
     } 
     // usual
-    else {
+    else if (status == 'before') {
         window.scrollTo({
             left: 0,
             top: findPos(document.getElementById(day.get_name()))[1] - 170,
             behavior: 'smooth'
         });
+    }
+    else {
+    window.scrollTo({
+        left: 0,
+        top: findPos(document.getElementById(day.get_name()))[1] - 130,
+        behavior: 'smooth'
+    });
     }
     
 }
