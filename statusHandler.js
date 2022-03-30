@@ -2,8 +2,8 @@
 
 
 
-// Getting current lesson (object)
-function whatLessonNow(time) {
+// Getting current status
+function whatStatusNow(time) {
 
     // Getting current time and day (in object)
     var day = my_getWeekDay(currentDate(time));
@@ -46,7 +46,7 @@ function currentStatus(status, time) {
         document.getElementById('current_status').innerHTML = status.get_name();
         document.getElementById('current_time_name').innerHTML = 'Осталось';
         document.getElementById('current_time').innerHTML = estTime('lesson', time);
-        document.getElementById('week').style.margin = '110px 0 0 0';
+        document.getElementById('week').style.margin = '120px 0 0 0';
     }
 
     // break
@@ -69,11 +69,15 @@ function currentStatus(status, time) {
 
     // time after lessons
     if (status == 'after') {
+
+        var day = my_getWeekDay(currentDate(time));
+
         document.getElementById('current_subtitle').innerHTML = 'Сейчас';
         document.getElementById('current_status').innerHTML = 'Уроки уже закончились';
         document.getElementById('current_time_name').innerHTML = 'До ' + nextLesson(time).get_additionalName();
         document.getElementById('current_time').innerHTML = estTime('after', time);
         document.getElementById('week').style.margin = '150px 0 0 0';
+        
     }
 
     // weekend
@@ -153,7 +157,7 @@ function estTime(type, time) {
 
     // estimated time to lesson end
     if (type == 'lesson') {
-        let est = whatLessonNow(time).get_endTime().get_time();
+        let est = whatStatusNow(time).get_endTime().get_time();
         return secondsToTime(est - time, 'short');
     }
 
@@ -178,7 +182,14 @@ function estTime(type, time) {
 
 // For fast download of web page
 let time = currentTime();
-currentStatus(whatLessonNow(time), time);
+let day = my_getWeekDay(currentDate(time));
+
+// Scroll to current day on launch
+window.onload = function () {
+    scroll_to(day, whatStatusNow(time));
+}
+
+currentStatus(whatStatusNow(time), time);
 
 // timer for every second update
 setInterval(function () {
@@ -186,6 +197,71 @@ setInterval(function () {
     // Getting current time
     let time = currentTime();
 
-    currentStatus(whatLessonNow(time), time);
+    currentStatus(whatStatusNow(time), time);
 
 }, 1000);
+
+
+
+// Finding position of the object
+function findPos(obj) {
+    var curtop = 0;
+  
+    if (obj.offsetParent) {
+        do {
+            curtop += obj.offsetTop;
+        } while (obj = obj.offsetParent);
+
+        return curtop;
+    }
+}
+
+// Scrolling to the current day
+function scroll_to(day, status) {
+
+    // weekends
+    if (day == saturday | day == sunday) {
+        console.log(1);
+        window.scrollTo({
+            left: 0,
+            top: findPos(document.getElementById('monday')) - 170,
+            behavior: 'smooth'
+        });
+    } 
+    // friday evening
+    else if (day == friday & status == 'after') {
+        console.log(2);
+        window.scrollTo({
+            left: 0,
+            top: findPos(document.getElementById('monday')) - 170,
+            behavior: 'smooth'
+        });
+    } 
+    // evening
+    else if (status == 'after') {
+        nextDay = my_getWeekDay(getDayNumber(day) + 1);
+        console.log(3);
+        window.scrollTo({
+            left: 0,
+            top: findPos(document.getElementById(nextDay.get_name())) - 170,
+            behavior: 'smooth'
+        });
+    } 
+    // usual
+    else if (status == 'before') {
+        console.log(4);
+        window.scrollTo({
+            left: 0,
+            top: findPos(document.getElementById(day.get_name())) - 170,
+            behavior: 'smooth'
+        });
+    }
+    else {
+    console.log(5);
+    window.scrollTo({
+        left: 0,
+        top: findPos(document.getElementById(day.get_name())) - 170,
+        behavior: 'smooth'
+    });
+    }
+}
